@@ -71,20 +71,39 @@ namespace Lab1_BinarySearchTree
         {
             throw new NotImplementedException();
         }
-
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
-        }
-
-        public bool Remove(T item)
-        {
-            throw new NotImplementedException();
+            return Preorder();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return Preorder();
+        }
+                
+
+        public IEnumerator<T> Preorder()
+        {
+            Stack<Node<T>> stack = new Stack<Node<T>>();
+            if (root == null)
+            {
+                yield break;
+            } else
+            {
+                stack.Push(root);
+            }
+            
+
+            while(stack.Count != 0)
+            {
+                Node<T> current = stack.Pop();
+                yield return current.Value;
+                if (current.Right != null)
+                    stack.Push(current.Right);
+                if (current.Left != null)
+                    stack.Push(current.Left);
+            }
+
         }
 
         bool IsEmpty
@@ -92,11 +111,18 @@ namespace Lab1_BinarySearchTree
             get { return root == null; }
         }
 
+        public bool Remove(T item)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Clear()
         {
             root = null;
             size = 0;
         }
+
+        
     }
 
     public class Node<T> : IComparable<Node<T>> where T : IComparable<T>
