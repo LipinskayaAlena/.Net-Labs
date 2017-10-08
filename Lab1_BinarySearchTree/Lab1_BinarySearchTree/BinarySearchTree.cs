@@ -9,18 +9,57 @@ namespace Lab1_BinarySearchTree
     {
         private Node<T> root;
 
-        public int Count => throw new NotImplementedException();
+        private int size;
 
-        public bool IsReadOnly => throw new NotImplementedException();
-
-        public void Add(T item)
+        public int Count
         {
-            throw new NotImplementedException();
+            get { return size;  }
         }
 
-        public void Clear()
+        public void Add(T value)
         {
-            throw new NotImplementedException();
+            Node<T> node = new Node<T>(value);
+            Node<T> subtreeRoot = root;
+
+            size++;
+
+            while(subtreeRoot != null)
+            {
+                if(value.CompareTo(subtreeRoot.Value) > 0)
+                {
+                    if(subtreeRoot.Right != null)
+                    {
+                        subtreeRoot = subtreeRoot.Right;
+                    }
+                    else
+                    {
+                        node.Parent = subtreeRoot;
+                        subtreeRoot.Right = node;
+                        break;
+                    }
+                } else if (value.CompareTo(subtreeRoot.Value) < 0)
+                {
+                    if(subtreeRoot.Left != null)
+                    {
+                        subtreeRoot = subtreeRoot.Left;
+                    } else
+                    {
+                        node.Parent = subtreeRoot;
+                        subtreeRoot.Left = node;
+                        break;
+                    }
+                }
+            }
+
+            if(IsEmpty)
+            {
+                root = node;
+            }
+        }
+
+        public bool IsReadOnly
+        {
+            get { return false; }
         }
 
         public bool Contains(T item)
@@ -46,6 +85,17 @@ namespace Lab1_BinarySearchTree
         IEnumerator IEnumerable.GetEnumerator()
         {
             throw new NotImplementedException();
+        }
+
+        bool IsEmpty
+        {
+            get { return root == null; }
+        }
+
+        public void Clear()
+        {
+            root = null;
+            size = 0;
         }
     }
 
