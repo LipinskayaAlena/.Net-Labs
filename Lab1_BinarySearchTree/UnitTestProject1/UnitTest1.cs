@@ -5,7 +5,16 @@ using Lab1_BinarySearchTree;
 [TestClass]
 public class UnitTest1
 {
-
+     
+    [TestMethod]
+    public void createBSTTest()
+    {
+        BinarySearchTree<System.Int32> binarySearchTree = new BinarySearchTree<System.Int32>();
+        binarySearchTree.Add(1);
+        binarySearchTree.Add(3);
+        binarySearchTree.Add(2);
+        Assert.IsTrue(binarySearchTree.Count == 3);
+    }
 
     [TestMethod]
     public void isBST()
@@ -17,9 +26,7 @@ public class UnitTest1
         binarySearchTree.Add(1);
         binarySearchTree.Add(6);
         binarySearchTree.Add(4);
-
         Assert.IsTrue(isBSTUtil(binarySearchTree.Root, System.Int32.MinValue, System.Int32.MaxValue));
-             
         
     }
 
