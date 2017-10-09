@@ -5,11 +5,16 @@ using System.Text;
 
 namespace Lab1_BinarySearchTree
 {
-    class BinarySearchTree<T> : ICollection<T> where T : IComparable<T>
+    public class BinarySearchTree<T> : ICollection<T> where T : IComparable<T>
     {
         private Node<T> root;
 
         private int size;
+
+        public Node<T> Root
+        {
+            get { return root; }
+        }
 
         public int Count
         {
