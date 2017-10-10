@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Lab1_BinarySearchTree
 {
@@ -46,7 +45,8 @@ namespace Lab1_BinarySearchTree
             Node<T> node = new Node<T>(value);
             Node<T> subtreeRoot = root;
 
-            size++;
+            if(!Contains(value))
+                size++;
 
             while(subtreeRoot != null)
             {
@@ -62,7 +62,7 @@ namespace Lab1_BinarySearchTree
                         subtreeRoot.Right = node;
                         break;
                     }
-                } else if (comparer.Compare(value, subtreeRoot.Value) < 0)
+                } else if (comparer.Compare(value, subtreeRoot.Value) <= 0)
                 {
                     if(subtreeRoot.Left != null)
                     {
