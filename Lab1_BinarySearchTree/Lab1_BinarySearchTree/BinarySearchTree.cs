@@ -219,16 +219,57 @@ namespace Lab1_BinarySearchTree
 
         public bool Remove(T item)
         {
-            throw new NotImplementedException();
+            if(root == null)
+                return false;
+
+            if(Contains(item))
+            {
+                DeleteNode(root, item);
+                size--;
+            } else
+                return false;
+            
+            return true;
         }
+
+        public Node<T> DeleteNode(Node<T> node, T item)
+        {
+            if(node == null)
+                return node;
+            
+            if(comparer.Compare(item, node.Value) < 0)
+                node.Left = DeleteNode(node.Left, item);
+            else if (comparer.Compare(item, node.Value) > 0)
+                node.Right = DeleteNode(node.Right, item);
+            else if (node.Left != null && node.Right != null)
+            {
+                node.Value = Min(node.Right).Value;
+                node.Right = DeleteNode(node.Right, node.Value);
+            } else
+            {
+                if(node.Left != null)
+                    node = node.Left;
+                 else
+                    node = node.Right;
+            }
+            return node;
+        }
+
+        public Node<T> Min(Node<T> node)
+        {
+            if (node.Left == null)
+                return node;
+             else
+                return Min(node.Left);
+        }
+
+        
 
         public void Clear()
         {
             root = null;
             size = 0;
         }
-
-        
 
     }
 

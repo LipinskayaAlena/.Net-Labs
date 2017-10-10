@@ -21,6 +21,40 @@ public class UnitTest1
     }
 
     [TestMethod]
+    public void DeleteNodeTest()
+    {
+        BinarySearchTree<System.Int32> binarySearchTree = new BinarySearchTree<System.Int32>(new System.Int32[] { 8, 10, 3, 14, 6, 13, 7, 4, 1 });
+        System.Int32[] expected1 = new System.Int32[] { 1, 3, 4, 6, 7, 8, 10, 13 };
+        System.Int32[] expected2 = new System.Int32[] { 1, 4, 6, 7, 8, 10, 13 };
+        System.Int32[] expected3 = new System.Int32[] { 1, 6, 7, 8, 10, 13 };
+
+        Assert.IsFalse(binarySearchTree.Remove(15));
+        Assert.IsTrue(binarySearchTree.Remove(14));
+        int i = 0;
+        foreach (System.Int32 value in binarySearchTree.Inorder())
+        {
+            Assert.IsTrue(value == expected1[i++]);
+
+        }
+        Assert.IsTrue(binarySearchTree.Remove(3));
+        i = 0;
+        foreach (System.Int32 value in binarySearchTree.Inorder())
+        {
+            Assert.IsTrue(value == expected2[i++]);
+
+        }
+        Assert.IsTrue(binarySearchTree.Remove(4));
+        i = 0;
+        foreach (System.Int32 value in binarySearchTree.Inorder())
+        {
+            Assert.IsTrue(value == expected3[i++]);
+        }
+
+        Assert.IsTrue(binarySearchTree.Count == expected3.Length);
+
+    }
+
+    [TestMethod]
     public void CopyTest()
     {
         BinarySearchTree<System.Int32> binarySearchTree = new BinarySearchTree<System.Int32>(new System.Int32[] { 1, 3, 2 });
@@ -31,9 +65,7 @@ public class UnitTest1
     public void ContainsNodeTest()
     {
         BinarySearchTree<System.Int32> binarySearchTree = new BinarySearchTree<System.Int32>(new System.Int32[] { 1, 3, 2 });
-        
         Assert.IsTrue(binarySearchTree.Contains(2));
-        
     }
 
     [TestMethod]
