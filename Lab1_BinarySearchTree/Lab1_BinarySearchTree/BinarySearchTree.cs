@@ -5,8 +5,10 @@ using System.Text;
 
 namespace Lab1_BinarySearchTree
 {
-    public class BinarySearchTree<T> : ICollection<T> where T : IComparable<T>
+    public class BinarySearchTree<T> : ICollection<T>
     {
+        private IComparer<T> comparer;
+
         private Node<T> root;
 
         private int size;
@@ -14,12 +16,34 @@ namespace Lab1_BinarySearchTree
         public Node<T> Root
         {
             get { return root; }
+                
         }
+
+
 
         public int Count
         {
             get { return size;  }
         }
+
+        public BinarySearchTree(IEnumerable<T> collection)
+        {
+            comparer = Comparer<T>.Default;
+            foreach(var value in collection) {
+                Add(value);
+            }
+        }
+
+        public BinarySearchTree(IEnumerable<T> collection, IComparer<T> comparer)
+        {
+            this.comparer = comparer;
+            foreach (var value in collection)
+            {
+                Add(value);
+            }
+        }
+
+
 
         public void Add(T value)
         {
@@ -30,7 +54,7 @@ namespace Lab1_BinarySearchTree
 
             while(subtreeRoot != null)
             {
-                if(value.CompareTo(subtreeRoot.Value) > 0)
+                if(comparer.Compare(value, subtreeRoot.Value) > 0)
                 {
                     if(subtreeRoot.Right != null)
                     {
@@ -42,7 +66,7 @@ namespace Lab1_BinarySearchTree
                         subtreeRoot.Right = node;
                         break;
                     }
-                } else if (value.CompareTo(subtreeRoot.Value) < 0)
+                } else if (comparer.Compare(value, subtreeRoot.Value) < 0)
                 {
                     if(subtreeRoot.Left != null)
                     {
@@ -78,16 +102,48 @@ namespace Lab1_BinarySearchTree
         }
         public IEnumerator<T> GetEnumerator()
         {
-            return Preorder();
+            return Inorder().GetEnumerator();
         }
+        
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return Preorder();
+            return GetEnumerator();
         }
                 
+        public IEnumerable<T> Inorder()
+        {
+            Node<T> current = null;
+            Stack<Node<T>> stack = new Stack<Node<T>>();
+            if (root == null)
+            {
+                yield break;
+            } else
+            {
+                current = root;
+            }
 
-        public IEnumerator<T> Preorder()
+
+            do
+            {
+                //Node<T> current = stack.Pop();
+                if (current.Left != null)
+                {
+                    stack.Push(current.Left);
+                }
+                yield return current.Value;
+                if (current.Right != null)
+                {
+                    stack.Push(current.Right);
+                }
+                current = stack.Pop();
+            } while (stack.Count != 0);
+
+
+        }
+
+
+        public IEnumerable<T> Preorder()
         {
             Stack<Node<T>> stack = new Stack<Node<T>>();
             if (root == null)
@@ -128,9 +184,10 @@ namespace Lab1_BinarySearchTree
         }
 
         
+
     }
 
-    public class Node<T> : IComparable<Node<T>> where T : IComparable<T>
+    public class Node<T>
     {
         public Node<T> Left { get; set; }
 
@@ -145,15 +202,9 @@ namespace Lab1_BinarySearchTree
             Value = value;
         }
 
-        public int CompareTo(Node<T> other)
-        {
-            if(other == null)
-            {
-                return -1;
-            }
-            return this.Value.CompareTo(other.Value);
-        }
     }
+
+
 
 
 
