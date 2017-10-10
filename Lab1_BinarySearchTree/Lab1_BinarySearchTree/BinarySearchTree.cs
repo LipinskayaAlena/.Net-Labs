@@ -132,10 +132,44 @@ namespace Lab1_BinarySearchTree
                     current = node.Right;
                 }
             }
-            
-
-
         }
+
+        public IEnumerable<T> Postorder()
+        {
+            Stack<Node<T>> stack = new Stack<Node<T>>();
+            if (root == null)
+            {
+                yield break;
+            }
+            stack.Push(root);
+            
+            while (stack.Count != 0)
+            {
+                Node<T> current = stack.Peek();
+
+                if (current.Right != null && current.Left != null)
+                {
+                    if(current.Right != null)
+                    {
+                        stack.Push(current.Right);
+                        current.Right = null;
+                    }
+                    
+                    if(current.Left != null)
+                    {
+                        stack.Push(current.Left);
+                        current.Left = null;
+                    }
+                    
+                }
+                else
+                {
+                    Node<T> node = stack.Pop();
+                    yield return node.Value;
+                }
+            }
+        }
+
 
 
         public IEnumerable<T> Preorder()

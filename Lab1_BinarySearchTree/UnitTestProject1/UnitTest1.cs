@@ -8,8 +8,8 @@ public class UnitTest1
     [TestMethod]
     public void InorderTest()
     {
-        System.Int32[] data = new System.Int32[] { 8, 10, 14, 3, 1, 13, 6, 7, 4 };
-        System.Int32[] expected = new System.Int32[] {1, 3, 4, 6, 7, 8, 10, 13, 14 };
+        System.Int32[] data = new System.Int32[] { 8, 10, 14, 3, 1, 13, 6, 7, 4, 2 };
+        System.Int32[] expected = new System.Int32[] { 1, 2, 3, 4, 6, 7, 8, 10, 13, 14 };
         BinarySearchTree<System.Int32> binarySearchTree = new BinarySearchTree<System.Int32>(data);
         
         int i = 0;
@@ -17,6 +17,21 @@ public class UnitTest1
         {
             Assert.IsTrue(value == expected[i++]);
            
+        }
+    }
+
+    [TestMethod]
+    public void PostorderTest()
+    {
+        System.Int32[] data = new System.Int32[] { 8, 10, 14, 3, 1, 13, 6, 7, 4 };
+        System.Int32[] expected = new System.Int32[] { 1, 4, 7, 6, 3, 13, 14, 10, 8 };
+        BinarySearchTree<System.Int32> binarySearchTree = new BinarySearchTree<System.Int32>(data);
+
+        int i = 0;
+        foreach (System.Int32 value in binarySearchTree.Postorder())
+        {
+            Assert.IsTrue(value == expected[i++]);
+
         }
     }
 
