@@ -21,6 +21,13 @@ public class UnitTest1
     }
 
     [TestMethod]
+    public void CopyTest()
+    {
+        BinarySearchTree<System.Int32> binarySearchTree = new BinarySearchTree<System.Int32>(new System.Int32[] { 1, 3, 2 });
+        binarySearchTree.CopyTo(new System.Int32[6], 3);        
+    }
+
+    [TestMethod]
     public void ContainsNodeTest()
     {
         BinarySearchTree<System.Int32> binarySearchTree = new BinarySearchTree<System.Int32>(new System.Int32[] { 1, 3, 2 });

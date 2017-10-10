@@ -19,8 +19,6 @@ namespace Lab1_BinarySearchTree
                 
         }
 
-
-
         public int Count
         {
             get { return size;  }
@@ -42,8 +40,6 @@ namespace Lab1_BinarySearchTree
                 Add(value);
             }
         }
-
-
 
         public void Add(T value)
         {
@@ -109,7 +105,18 @@ namespace Lab1_BinarySearchTree
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            if(array == null)
+                throw new ArgumentException();
+            
+            if(arrayIndex < 0)
+                throw new ArgumentOutOfRangeException();
+            
+            if (array.Length - arrayIndex < Count)
+                throw new ArgumentException();
+            
+            foreach (var value in this)
+                array[arrayIndex++] = value;
+            
         }
         public IEnumerator<T> GetEnumerator()
         {
