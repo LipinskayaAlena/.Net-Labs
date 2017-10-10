@@ -5,33 +5,32 @@ using Lab1_BinarySearchTree;
 [TestClass]
 public class UnitTest1
 {
-    //[TestMethod]
-    //public void InorderTest()
-    //{
-    //    System.Int32[] data = new System.Int32[] { 8, 10, 14, 3, 1, 13, 6, 7, 4 };
-    //    System.Int32[] expected = new System.Int32[] {1, 3, 4, 6, 7, 8, 10, 14, 13 };
-    //    BinarySearchTree<System.Int32> binarySearchTree = new BinarySearchTree<System.Int32>(data);
+    [TestMethod]
+    public void InorderTest()
+    {
+        System.Int32[] data = new System.Int32[] { 8, 10, 14, 3, 1, 13, 6, 7, 4 };
+        System.Int32[] expected = new System.Int32[] {1, 3, 4, 6, 7, 8, 10, 13, 14 };
+        BinarySearchTree<System.Int32> binarySearchTree = new BinarySearchTree<System.Int32>(data);
         
-    //    int i = 0;
-    //    foreach (System.Int32 value in binarySearchTree.Inorder())
-    //    {
-    //        Assert.IsTrue(value == expected[i++]);
+        int i = 0;
+        foreach (System.Int32 value in binarySearchTree.Inorder())
+        {
+            Assert.IsTrue(value == expected[i++]);
            
-    //    }
-    //}
+        }
+    }
 
     [TestMethod]
     public void PreorderTest()
     {
-        System.Int32[] data = new System.Int32[] { 8, 10, 14, 3, 1, 13, 6, 7, 4 };
-        System.Int32[] expected = new System.Int32[] { 8, 3, 1, 6, 4, 7, 10, 14, 13 };
+        System.Int32[] data = new System.Int32[] { 8, 10, 14, 3, 1, 13, 6, 7, 4, 2};
+        System.Int32[] expected = new System.Int32[] { 8, 3, 1, 2, 6, 4, 7, 10, 14, 13 };
         BinarySearchTree<System.Int32> binarySearchTree = new BinarySearchTree<System.Int32>(data);
 
         int i = 0;
         foreach (System.Int32 value in binarySearchTree.Preorder())
         {
             Assert.IsTrue(value == expected[i++]);
-
         }
     }
 

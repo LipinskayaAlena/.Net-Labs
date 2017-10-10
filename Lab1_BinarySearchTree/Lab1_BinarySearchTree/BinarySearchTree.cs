@@ -113,31 +113,26 @@ namespace Lab1_BinarySearchTree
                 
         public IEnumerable<T> Inorder()
         {
-            Node<T> current = null;
             Stack<Node<T>> stack = new Stack<Node<T>>();
             if (root == null)
             {
                 yield break;
-            } else
-            {
-                current = root;
             }
-
-
-            do
+            Node<T> current = root;
+            while(stack.Count != 0 || current != null)
             {
-                //Node<T> current = stack.Pop();
-                if (current.Left != null)
+                if(current != null)
                 {
-                    stack.Push(current.Left);
-                }
-                yield return current.Value;
-                if (current.Right != null)
+                    stack.Push(current);
+                    current = current.Left;
+                } else
                 {
-                    stack.Push(current.Right);
+                    Node<T> node = stack.Pop();
+                    yield return node.Value;
+                    current = node.Right;
                 }
-                current = stack.Pop();
-            } while (stack.Count != 0);
+            }
+            
 
 
         }
