@@ -93,8 +93,19 @@ namespace Lab1_BinarySearchTree
 
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            var current = root;
+            while(current != null)
+            {
+                if(comparer.Compare(item, current.Value) == 0)
+                    return true;
+                 else if(comparer.Compare(item, current.Value) < 0)
+                    current = current.Left;
+                 else
+                    current = current.Right;
+            }
+            return false;
         }
+        
 
         public void CopyTo(T[] array, int arrayIndex)
         {
@@ -147,25 +158,23 @@ namespace Lab1_BinarySearchTree
             {
                 Node<T> current = stack.Peek();
 
-                if (current.Right != null && current.Left != null)
+                if(current.Right == null && current.Left == null)
                 {
-                    if(current.Right != null)
+                    Node<T> node = stack.Pop();
+                    yield return node.Value;
+                } else
+                {
+                    if (current.Right != null)
                     {
                         stack.Push(current.Right);
                         current.Right = null;
                     }
-                    
-                    if(current.Left != null)
+
+                    if (current.Left != null)
                     {
                         stack.Push(current.Left);
                         current.Left = null;
                     }
-                    
-                }
-                else
-                {
-                    Node<T> node = stack.Pop();
-                    yield return node.Value;
                 }
             }
         }

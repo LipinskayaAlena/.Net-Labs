@@ -21,6 +21,15 @@ public class UnitTest1
     }
 
     [TestMethod]
+    public void ContainsNodeTest()
+    {
+        BinarySearchTree<System.Int32> binarySearchTree = new BinarySearchTree<System.Int32>(new System.Int32[] { 1, 3, 2 });
+        
+        Assert.IsTrue(binarySearchTree.Contains(2));
+        
+    }
+
+    [TestMethod]
     public void PostorderTest()
     {
         System.Int32[] data = new System.Int32[] { 8, 10, 14, 3, 1, 13, 6, 7, 4 };
@@ -54,22 +63,13 @@ public class UnitTest1
     public void CreateBSTTest()
     {
         BinarySearchTree<System.Int32> binarySearchTree = new BinarySearchTree<System.Int32>(new System.Int32[] { 1, 3, 2 });
-        binarySearchTree.Add(1);
-        binarySearchTree.Add(3);
-        binarySearchTree.Add(2);
         Assert.IsTrue(binarySearchTree.Count == 3);
     }
 
     [TestMethod]
-    public void isBST()
+    public void IsBST()
     {
         BinarySearchTree<System.Int32> binarySearchTree = new BinarySearchTree<System.Int32>(new System.Int32[] { 3, 2, 5, 1, 6, 4});
-        binarySearchTree.Add(3);
-        binarySearchTree.Add(2);
-        binarySearchTree.Add(5);
-        binarySearchTree.Add(1);
-        binarySearchTree.Add(6);
-        binarySearchTree.Add(4);
         Assert.IsTrue(IsBSTUtil(binarySearchTree.Root, System.Int32.MinValue, System.Int32.MaxValue));
         
     }
