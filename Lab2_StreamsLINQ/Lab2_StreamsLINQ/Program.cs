@@ -36,23 +36,15 @@ namespace Lab2_StreamsLINQ
                 switch(choice)
                 {
                     case 1:
-                        {
-                            OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
-                            if(dialog.ShowDialog() == DialogResult.OK)
-                            {
-                                fileName = dialog.FileName;
-                            }
-                            break;
-                        }
+                        OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
+                        if(dialog.ShowDialog() == DialogResult.OK)
+                            fileName = dialog.FileName;
+                        break;
                     case 2:
-                        {
-                            break;
-                        }
+                        break;
                     default:
-                        {
-                            Console.WriteLine("Incorrect command");
-                            break;
-                        }
+                        Console.WriteLine("Incorrect command");
+                        break;
 
                 }
 
