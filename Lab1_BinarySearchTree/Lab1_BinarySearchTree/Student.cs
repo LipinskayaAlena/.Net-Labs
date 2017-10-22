@@ -7,6 +7,7 @@ namespace Lab1_BinarySearchTree
     {
         private String firstName;
         private String secondName;
+        private String nameTest;
         private DateTime date;
         private int rating;
 
@@ -16,13 +17,16 @@ namespace Lab1_BinarySearchTree
 
         public String SecondName { get { return secondName; } }
 
+        public String NameTest { get { return nameTest; } }
+
         public DateTime Date { get { return date; } }
         
 
-        public Student(String fName, String sName, DateTime date, int rating)
+        public Student(String fName, String sName, String nameTest, DateTime date, int rating)
         {
             this.firstName = fName;
             this.secondName = sName;
+            this.nameTest = nameTest;
             this.date = date;
             this.rating = rating;
         }
@@ -40,6 +44,11 @@ namespace Lab1_BinarySearchTree
         internal int CompareToBySecondName(Student s2)
         {
             return new ComparatorString().Compare(this.secondName, s2.SecondName);
+        }
+
+        internal int CompareToByNameTest(Student s2)
+        {
+            return new ComparatorString().Compare(this.nameTest, s2.NameTest);
         }
 
         internal int CompareToByDate(Student s2)

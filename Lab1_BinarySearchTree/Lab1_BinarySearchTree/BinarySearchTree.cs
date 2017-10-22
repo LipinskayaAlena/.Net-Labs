@@ -23,11 +23,6 @@ namespace Lab1_BinarySearchTree
             get { return size;  }
         }
 
-        public BinarySearchTree()
-        {
-            comparer = Comparer<T>.Default;
-        }
-
         public BinarySearchTree(IComparer<T> comparer)
         {
             this.comparer = comparer;
