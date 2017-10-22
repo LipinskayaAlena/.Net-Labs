@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Lab1_BinarySearchTree
 {
-    public class ComparatorStudent : Comparer<Student>
+    public class ComparatorFirstNameStudent : Comparer<Student>
     {
         public override int Compare(Student s1, Student s2)
         {
-            return s1.CompareTo(s2);
+            return s1.CompareToByFirstName(s2);
         }
     }
 }

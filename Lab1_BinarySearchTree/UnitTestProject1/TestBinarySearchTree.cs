@@ -173,14 +173,47 @@ public class TestBinarySearchTree
     }
 
     [TestMethod]
-    public void ComparerStudentTest()
+    public void ComparerByFirstNameStudentTest()
     {
-        Student s1 = new Student("Fedya", "Sidorov", new DateTime(2017, 4, 10), 8);
+        Student s1 = new Student("Debra", "Garcia", new DateTime(2017, 4, 10), 8);
         Student s2 = new Student("Alesia", "Ivanova", new DateTime(2017, 12, 20), 6);
-        Student s3 = new Student("Fedya", "Sidorov", new DateTime(2017, 2, 11), 7);
-        Student s4 = new Student("Fedya", "Sidorov", new DateTime(2017, 3, 15), 9);
+        Student s3 = new Student("Nick", "Adams", new DateTime(2017, 2, 11), 7);
+        Student s4 = new Student("Cesar", "Garcia", new DateTime(2017, 3, 15), 9);
+
+        BinarySearchTree<Student> tree = new BinarySearchTree<Student>(new Student[] { s1, s2, s3, s4 }, new ComparatorFirstNameStudent());
+
+        Student[] expected = new Student[] { s2, s4, s1, s3 };
+        int i = 0;
+        foreach (Student student in tree.Inorder())
+            Assert.AreEqual(expected[i++], student);
+    }
+
+    [TestMethod]
+    public void ComparerByDateStudentTest()
+    {
+        Student s1 = new Student("Debra", "Garcia", new DateTime(2017, 4, 10), 8);
+        Student s2 = new Student("Alesia", "Ivanova", new DateTime(2017, 12, 20), 6);
+        Student s3 = new Student("Nick", "Adams", new DateTime(2017, 2, 11), 7);
+        Student s4 = new Student("Cesar", "Garcia", new DateTime(2017, 3, 15), 9);
+
+        BinarySearchTree<Student> tree = new BinarySearchTree<Student>(new Student[] { s1, s2, s3, s4 }, new ComparatorDateStudent());
+
+        Student[] expected = new Student[] { s3, s4, s1, s2 };
+        int i = 0;
+        foreach (Student student in tree.Inorder())
+            Assert.AreEqual(expected[i++], student);
+    }
+
+    [TestMethod]
+    public void ComparerByRatingStudentTest()
+    {
+        Student s1 = new Student("Debra", "Garcia", new DateTime(2017, 4, 10), 8);
+        Student s2 = new Student("Alesia", "Ivanova", new DateTime(2017, 12, 20), 6);
+        Student s3 = new Student("Nick", "Adams", new DateTime(2017, 2, 11), 7);
+        Student s4 = new Student("Cesar", "Garcia", new DateTime(2017, 3, 15), 9);
         
-        BinarySearchTree<Student> tree = new BinarySearchTree<Student>(new Student[] {s1, s2, s3, s4 }, new ComparatorStudent());
+        BinarySearchTree<Student> tree = new BinarySearchTree<Student>(new Student[] {s1, s2, s3, s4 }, new ComparatorRatingStudent());
+        
         Student[] expected = new Student[] { s3, s2, s4, s1 };
         int i = 0;
         foreach (Student student in tree.Postorder())

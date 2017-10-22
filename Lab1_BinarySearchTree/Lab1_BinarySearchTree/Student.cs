@@ -2,13 +2,13 @@
 
 namespace Lab1_BinarySearchTree
 {
-    [Serializable]
+    
     public class Student
     {
-        public String firstName;
-        public String secondName;
-        public DateTime date;
-        public int rating;
+        private String firstName;
+        private String secondName;
+        private DateTime date;
+        private int rating;
 
         public int Rating { get { return rating; } }
 
@@ -27,9 +27,32 @@ namespace Lab1_BinarySearchTree
             this.rating = rating;
         }
 
-        internal int CompareTo(Student s2)
+        internal int CompareToByRating(Student s2)
         {
             return rating.CompareTo(s2.Rating);
+        }
+
+        internal int CompareToByFirstName(Student s2)
+        {
+            return new ComparatorString().Compare(this.firstName, s2.FirstName);
+        }
+
+        internal int CompareToBySecondName(Student s2)
+        {
+            return new ComparatorString().Compare(this.secondName, s2.SecondName);
+        }
+
+        internal int CompareToByDate(Student s2)
+        {
+            return DateTime.Compare(this.date, s2.Date);
+        }
+
+
+        public override string ToString()
+        {
+            return "Student " + this.firstName + " " + this.secondName + 
+                "\n Date of passing test " + this.date + 
+                "\n Rating " + this.rating + "\n";
         }
     }
 }
