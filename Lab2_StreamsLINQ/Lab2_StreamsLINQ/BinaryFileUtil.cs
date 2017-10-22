@@ -57,5 +57,26 @@ namespace Lab2_StreamsLINQ
                    where student.NameTest.Equals(nameTest) || student.NameTest.StartsWith(nameTest)
                    select student;
         }
+
+        public static IEnumerable<Student> GetByFirstName(BinarySearchTree<Student> binaryTree, String fName)
+        {
+            return from student in binaryTree
+                   where student.FirstName.Equals(fName) || student.FirstName.StartsWith(fName)
+                   select student;
+        }
+
+        public static IEnumerable<Student> GetBySecondName(BinarySearchTree<Student> binaryTree, String sName)
+        {
+            return from student in binaryTree
+                   where student.SecondName.Equals(sName) || student.SecondName.StartsWith(sName)
+                   select student;
+        }
+
+        public static IEnumerable<Student> GetByRating(BinarySearchTree<Student> binaryTree, int rating)
+        {
+            return from student in binaryTree
+                   where student.Rating == rating
+                   select student;
+        }
     }
 }

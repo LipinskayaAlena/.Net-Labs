@@ -25,7 +25,9 @@ namespace Lab2_StreamsLINQ
             "1 - Get students by date of passing tests\n" +
             "2 - Get students by name of test\n" +
             "3 - Get students by rating\n" +
-            "4 - Cancel\n" +
+            "4 - Get students by first name\n" +
+            "5 - Get students by second name\n" +
+            "6 - Cancel\n" +
             "Your choice is: ";
 
         public UserController() { }
@@ -112,15 +114,35 @@ namespace Lab2_StreamsLINQ
                             Console.WriteLine(student.ToString());
                         break;
                     case 3:
+                        Console.WriteLine("Enter rating: ");
+                        String lineRating = Console.ReadLine();
+                        int rating;
+                        if (Int32.TryParse(lineRating, out rating))
+                        {
+                            foreach (Student student in BinaryFileUtil.GetByRating(binaryTree, rating))
+                                Console.WriteLine(student.ToString());
+                        }
+                        else
+                            Console.WriteLine("Incorrect rating");
                         break;
                     case 4:
+                        Console.WriteLine("Enter first name of student or part of first name: ");
+                        foreach (Student student in BinaryFileUtil.GetByFirstName(binaryTree, Console.ReadLine()))
+                            Console.WriteLine(student.ToString());
+                        break;
+                    case 5:
+                        Console.WriteLine("Enter second name of student or part of second name: ");
+                        foreach (Student student in BinaryFileUtil.GetBySecondName(binaryTree, Console.ReadLine()))
+                            Console.WriteLine(student.ToString());
+                        break;
+                    case 6:
                         break;
                     default:
                         Console.WriteLine("Incorrect command");
                         break;
 
                 }
-            } while (choice != 4);
+            } while (choice != 6);
         }
 
         public static String GetFile()
