@@ -51,6 +51,11 @@ namespace Lab2_StreamsLINQ
                    select student;
         }
 
-
+        public static IEnumerable<Student> GetByNameTest(BinarySearchTree<Student> binaryTree, String nameTest)
+        {
+            return from student in binaryTree
+                   where student.NameTest.Equals(nameTest) || student.NameTest.StartsWith(nameTest)
+                   select student;
+        }
     }
 }

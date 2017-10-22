@@ -22,9 +22,9 @@ namespace Lab2_StreamsLINQ
 
 
         private String SUB_COMMANDS = "----------Lab2_streamLINQ-----------\n" +
-            "1 - Get tests by date\n" +
-            "2 - Get tests by name\n" +
-            "3 - Get tests by rating\n" +
+            "1 - Get students by date of passing tests\n" +
+            "2 - Get students by name of test\n" +
+            "3 - Get students by rating\n" +
             "4 - Cancel\n" +
             "Your choice is: ";
 
@@ -107,6 +107,9 @@ namespace Lab2_StreamsLINQ
                             Console.WriteLine("Incorrect format date");
                         break;
                     case 2:
+                        Console.WriteLine("Enter name test or part of name: ");
+                        foreach (Student student in BinaryFileUtil.GetByNameTest(binaryTree, Console.ReadLine()))
+                            Console.WriteLine(student.ToString());
                         break;
                     case 3:
                         break;
