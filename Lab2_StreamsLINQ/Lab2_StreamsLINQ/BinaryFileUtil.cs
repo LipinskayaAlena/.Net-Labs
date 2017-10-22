@@ -1,25 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization;
 using System.IO;
 using Lab1_BinarySearchTree;
 namespace Lab2_StreamsLINQ
 {
     class BinaryFileUtil
     {
-        private BinarySearchTree<Student> binaryTree;
-
         private BinaryFileUtil() { }
 
         public static void Write(String fName, List<Student> students)
         {
             using (BinaryWriter writer = new BinaryWriter(File.Open(fName, FileMode.OpenOrCreate)))
             {
-                foreach(Student student in students)
+                foreach (Student student in students)
                 {
                     writer.Write(student.FirstName);
                     writer.Write(student.SecondName);
@@ -30,14 +24,27 @@ namespace Lab2_StreamsLINQ
             }
         }
 
-        public void Read()
+        public static BinarySearchTree<Student> Read(String fName)
         {
-            //BinaryReader reader = new BinaryReader(fs);
-            //while (reader.BaseStream.Position < reader.BaseStream.Length)
-            //{
-
-            //}
+            BinarySearchTree<Student> binaryTree = new BinarySearchTree<Student>(new ComparatorFirstNameStudent());
+            using (BinaryReader reader = new BinaryReader(File.Open(fName, FileMode.Open)))
+            {
+                while (reader.BaseStream.Position < reader.BaseStream.Length)
+                {
+                    String firstName = reader.ReadString();
+                    String secondName = reader.ReadString();
+                    String nameTest = reader.ReadString();
+                    DateTime date = DateTime.Parse(reader.ReadString());
+                    int rating = reader.ReadInt32();
+                    Student student = new Student(firstName, secondName, nameTest, date, rating);
+                    binaryTree.Add(student);
+                }
+            }
+            return binaryTree;
         }
+
+        
+
 
     }
 }
