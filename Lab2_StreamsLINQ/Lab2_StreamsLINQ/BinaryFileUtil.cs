@@ -58,22 +58,31 @@ namespace Lab2_StreamsLINQ
                    select student;
         }
 
-        public static IEnumerable<Student> GetByFirstName(BinarySearchTree<Student> binaryTree, String fName)
+        public static IEnumerable<Student> GetByFirstName(BinarySearchTree<Student> binaryTree, String fName, int numberLines)
         {
-            return from student in binaryTree
-                   where student.FirstName.Equals(fName) || student.FirstName.StartsWith(fName)
-                   select student;
+            IEnumerable<Student> students = from student in binaryTree
+                                            where student.FirstName.Equals(fName) || student.FirstName.StartsWith(fName)
+                                            select student;
+            if (numberLines != -1)
+                return students.Take(numberLines);
+            return students;
         }
 
-        public static IEnumerable<Student> GetBySecondName(BinarySearchTree<Student> binaryTree, String sName)
+        public static IEnumerable<Student> GetBySecondName(BinarySearchTree<Student> binaryTree, String sName, int numberLines)
         {
-            return from student in binaryTree
-                   where student.SecondName.Equals(sName) || student.SecondName.StartsWith(sName)
-                   select student;
+            IEnumerable<Student> students = from student in binaryTree
+                                     where student.SecondName.Equals(sName) || student.SecondName.StartsWith(sName)
+                                     select student;
+            if (numberLines != -1)
+                return students.Take(numberLines);
+            return students;
         }
 
-        public static IEnumerable<Student> GetByRating(BinarySearchTree<Student> binaryTree, int rating)
+        public static IEnumerable<Student> GetByRating(BinarySearchTree<Student> binaryTree, int rating, int numberLines)
         {
+            IEnumerable<Student> students = from student in binaryTree
+                                            where student.Rating == rating
+                                            select student;
             return from student in binaryTree
                    where student.Rating == rating
                    select student;
