@@ -17,6 +17,7 @@ namespace Lab2_StreamsLINQ
                 {
                     writer.Write(student.FirstName);
                     writer.Write(student.SecondName);
+                    writer.Write(student.NameTest);
                     writer.Write(student.Date.ToString());
                     writer.Write(student.Rating);
                 }
@@ -43,7 +44,12 @@ namespace Lab2_StreamsLINQ
             return binaryTree;
         }
 
-        
+        public static IEnumerable<Student> GetByDate(BinarySearchTree<Student> binaryTree, DateTime date)
+        {
+            return from student in binaryTree
+                   where student.Date.Equals(date)
+                   select student;
+        }
 
 
     }

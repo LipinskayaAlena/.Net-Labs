@@ -60,8 +60,9 @@ namespace Lab1_BinarySearchTree
         public override string ToString()
         {
             return "Student " + this.firstName + " " + this.secondName + 
-                "\n Date of passing test " + this.date + 
-                "\n Rating " + this.rating + "\n";
+                "\nDate of passing test " + this.date.ToString("dd-MM-yyyy") + 
+                "\nName of the test " + this.nameTest +
+                "\nRating " + this.rating + "\n";
         }
     }
 }
