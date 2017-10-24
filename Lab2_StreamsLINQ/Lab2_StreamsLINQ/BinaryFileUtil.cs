@@ -44,24 +44,30 @@ namespace Lab2_StreamsLINQ
             return binaryTree;
         }
 
-        public static IEnumerable<Student> GetByDate(BinarySearchTree<Student> binaryTree, DateTime date)
+        public static IEnumerable<Student> GetByDate(BinarySearchTree<Student> binaryTree, DateTime date, int numberLines)
         {
-            return from student in binaryTree
-                   where student.Date.Equals(date)
-                   select student;
+            IEnumerable<Student> students = from student in binaryTree
+                                            where student.Date.Equals(date)
+                                            select student;
+            if (numberLines != -1)
+                return students.Take(numberLines);
+            return students;
         }
 
-        public static IEnumerable<Student> GetByNameTest(BinarySearchTree<Student> binaryTree, String nameTest)
+        public static IEnumerable<Student> GetByNameTest(BinarySearchTree<Student> binaryTree, String nameTest, int numberLines)
         {
-            return from student in binaryTree
-                   where student.NameTest.Equals(nameTest) || student.NameTest.StartsWith(nameTest)
-                   select student;
+            IEnumerable<Student> students = from student in binaryTree
+                                            where student.NameTest.ToLower().Equals(nameTest.ToLower()) || student.NameTest.ToLower().StartsWith(nameTest.ToLower())
+                                            select student;
+            if (numberLines != -1)
+                return students.Take(numberLines);
+            return students;
         }
 
         public static IEnumerable<Student> GetByFirstName(BinarySearchTree<Student> binaryTree, String fName, int numberLines)
         {
             IEnumerable<Student> students = from student in binaryTree
-                                            where student.FirstName.Equals(fName) || student.FirstName.StartsWith(fName)
+                                            where student.FirstName.ToLower().Equals(fName.ToLower()) || student.FirstName.ToLower().StartsWith(fName.ToLower())
                                             select student;
             if (numberLines != -1)
                 return students.Take(numberLines);
@@ -71,7 +77,7 @@ namespace Lab2_StreamsLINQ
         public static IEnumerable<Student> GetBySecondName(BinarySearchTree<Student> binaryTree, String sName, int numberLines)
         {
             IEnumerable<Student> students = from student in binaryTree
-                                     where student.SecondName.Equals(sName) || student.SecondName.StartsWith(sName)
+                                     where student.SecondName.ToLower().Equals(sName.ToLower()) || student.SecondName.ToLower().StartsWith(sName.ToLower())
                                      select student;
             if (numberLines != -1)
                 return students.Take(numberLines);
@@ -83,9 +89,9 @@ namespace Lab2_StreamsLINQ
             IEnumerable<Student> students = from student in binaryTree
                                             where student.Rating == rating
                                             select student;
-            return from student in binaryTree
-                   where student.Rating == rating
-                   select student;
+            if (numberLines != -1)
+                return students.Take(numberLines);
+            return students;
         }
     }
 }

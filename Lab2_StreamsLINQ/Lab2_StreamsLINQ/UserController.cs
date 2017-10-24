@@ -37,7 +37,8 @@ namespace Lab2_StreamsLINQ
         
 
         private int numberLines;
-        
+
+        private IEnumerable<Student> students;
 
         public UserController() { }
 
@@ -70,7 +71,7 @@ namespace Lab2_StreamsLINQ
                         ExecuteData();
                         break;
                     case 2:
-                        BinaryFileUtil.Write(GetFile(), students);
+                        BinaryFileUtil.Write(GetFile(), dataStudents);
                         Console.WriteLine("File was written");
                         break;
                     case 3: //settings
@@ -111,7 +112,9 @@ namespace Lab2_StreamsLINQ
                         DateTime date;
                         if (DateTime.TryParse(lineDate, out date))
                         {
-                            foreach (Student student in BinaryFileUtil.GetByDate(binaryTree, date))
+                            PreSettings();
+                            students = BinaryFileUtil.GetByDate(binaryTree, date, numberLines);
+                            foreach (Student student in students)
                                 Console.WriteLine(student.ToString());
 
                         }
@@ -120,7 +123,11 @@ namespace Lab2_StreamsLINQ
                         break;
                     case 2:
                         Console.WriteLine("Enter name test or part of name: ");
-                        foreach (Student student in BinaryFileUtil.GetByNameTest(binaryTree, Console.ReadLine()))
+                        String nameOfTest = Console.ReadLine();
+                        PreSettings();
+                        students = BinaryFileUtil.GetByNameTest(binaryTree, nameOfTest, numberLines);
+                        
+                        foreach (Student student in students)
                             Console.WriteLine(student.ToString());
                         break;
                     case 3:
@@ -131,7 +138,7 @@ namespace Lab2_StreamsLINQ
                         if (Int32.TryParse(lineRating, out rating))
                         {
                             PreSettings();
-                            IEnumerable<Student> students = BinaryFileUtil.GetByRating(binaryTree, rating, numberLines);
+                            students = BinaryFileUtil.GetByRating(binaryTree, rating, numberLines);
                             CheckData(students);
                             foreach (Student student in students)
                                 Console.WriteLine(student.ToString());
@@ -223,7 +230,7 @@ namespace Lab2_StreamsLINQ
             return fileName;
         }
 
-        static List<Student> students = new List<Student>
+        static List<Student> dataStudents = new List<Student>
         {
             new Student("Svetlana", "Omelchenko", "Test2", new DateTime(2017, 4, 10), 8),
             new Student("Claire", "O'Donnell", "Test6", new DateTime(2017, 4, 12), 6),
