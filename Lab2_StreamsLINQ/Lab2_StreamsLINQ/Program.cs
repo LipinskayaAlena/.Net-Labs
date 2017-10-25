@@ -17,9 +17,5 @@ namespace Lab2_StreamsLINQ
             new UserController().Start();
             
         }
-
-        
-        
-
     }
 }

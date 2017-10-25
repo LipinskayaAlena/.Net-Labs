@@ -16,8 +16,7 @@ namespace Lab2_StreamsLINQ
         private String COMMANDS = "----------Lab2_streamLINQ-----------\n" +
             "1 - Choose binary file\n" +
             "2 - Create binary file\n" +
-            "3 - Settings\n" +
-            "4 - Exit\n" +
+            "3 - Exit\n" +
             "Your choice is: ";
         
         private String SUB_COMMANDS = "----------Lab2_streamLINQ-----------\n" +
@@ -34,12 +33,22 @@ namespace Lab2_StreamsLINQ
             "2 - Set order\n" +
             "3 - Cancel\n" + 
             "Your choice is: ";
+
+        private String ORDER_BY = "----------ORDER-----------\n" +
+            "1 - Order by first name\n" +
+            "2 - Order by second name\n" +
+            "3 - Order by name of the test\n" +
+            "4 - Order by date of pass test\n" + 
+            "5 - Order by rating\n" +
+            "6 - Cancel\n" +
+            "Your choice is: ";
         
 
         private int numberLines;
+        private int orderBy;
 
         private IEnumerable<Student> students;
-
+        private IEnumerable<Student> allStudents;
         public UserController() { }
 
 
@@ -65,27 +74,20 @@ namespace Lab2_StreamsLINQ
                         if (!fileName.EndsWith(".bin"))
                             Console.WriteLine("File is not binary");
                         else
-                        {
-                            binaryTree = BinaryFileUtil.Read(fileName);                            
-                        }
+                            binaryTree = BinaryFileUtil.Read(fileName);
                         ExecuteData();
                         break;
                     case 2:
                         BinaryFileUtil.Write(GetFile(), dataStudents);
                         Console.WriteLine("File was written");
                         break;
-                    case 3: //settings
-                        break;
-                    case 4: //exit
+                    case 3:
                         break;
                     default:
                         Console.WriteLine("Incorrect command");
                         break;
-
                 }
-
-
-            } while (choice != 4);
+            } while (choice != 3);
         }
 
         public void ExecuteData()
@@ -103,6 +105,7 @@ namespace Lab2_StreamsLINQ
                     continue;
                 }
                 numberLines = -1;
+                orderBy = -1;
 
                 switch (choice)
                 {
@@ -113,8 +116,10 @@ namespace Lab2_StreamsLINQ
                         if (DateTime.TryParse(lineDate, out date))
                         {
                             PreSettings();
-                            students = BinaryFileUtil.GetByDate(binaryTree, date, numberLines);
-                            foreach (Student student in students)
+                            allStudents = BinaryFileUtil.GetByDate(binaryTree, date);
+                            students = BinaryFileUtil.GetByNumberLines(allStudents, numberLines);
+                            CheckData(students);
+                            foreach (Student student in BinaryFileUtil.OrderStudents(students, orderBy))
                                 Console.WriteLine(student.ToString());
 
                         }
@@ -125,9 +130,10 @@ namespace Lab2_StreamsLINQ
                         Console.WriteLine("Enter name test or part of name: ");
                         String nameOfTest = Console.ReadLine();
                         PreSettings();
-                        students = BinaryFileUtil.GetByNameTest(binaryTree, nameOfTest, numberLines);
-                        
-                        foreach (Student student in students)
+                        allStudents = BinaryFileUtil.GetByNameTest(binaryTree, nameOfTest);
+                        students = BinaryFileUtil.GetByNumberLines(allStudents, numberLines);
+                        CheckData(students);
+                        foreach (Student student in BinaryFileUtil.OrderStudents(students, orderBy))
                             Console.WriteLine(student.ToString());
                         break;
                     case 3:
@@ -138,9 +144,10 @@ namespace Lab2_StreamsLINQ
                         if (Int32.TryParse(lineRating, out rating))
                         {
                             PreSettings();
-                            students = BinaryFileUtil.GetByRating(binaryTree, rating, numberLines);
+                            allStudents = BinaryFileUtil.GetByRating(binaryTree, rating);
+                            students = BinaryFileUtil.GetByNumberLines(allStudents, numberLines);
                             CheckData(students);
-                            foreach (Student student in students)
+                            foreach (Student student in BinaryFileUtil.OrderStudents(students, orderBy))
                                 Console.WriteLine(student.ToString());
                         }
                         else
@@ -150,18 +157,20 @@ namespace Lab2_StreamsLINQ
                         Console.WriteLine("Enter first name of student or part of first name: ");
                         String firstName = Console.ReadLine();
                         PreSettings();
-                        students = BinaryFileUtil.GetByFirstName(binaryTree, firstName, numberLines);
+                        allStudents = BinaryFileUtil.GetByFirstName(binaryTree, firstName);
+                        students = BinaryFileUtil.GetByNumberLines(allStudents, numberLines);
                         CheckData(students);
-                        foreach (Student student in students)
+                        foreach (Student student in BinaryFileUtil.OrderStudents(students, orderBy))
                             Console.WriteLine(student.ToString());
                         break;
                     case 5:
                         Console.WriteLine("Enter second name of student or part of second name: ");
                         String secondName = Console.ReadLine();
                         PreSettings();
-                        students = BinaryFileUtil.GetBySecondName(binaryTree, secondName, numberLines);
+                        allStudents = BinaryFileUtil.GetBySecondName(binaryTree, secondName);
+                        students = BinaryFileUtil.GetByNumberLines(allStudents, numberLines);
                         CheckData(students);
-                        foreach (Student student in students)
+                        foreach (Student student in BinaryFileUtil.OrderStudents(students, orderBy))
                             Console.WriteLine(student.ToString());
                         break;
                     case 6:
@@ -209,7 +218,7 @@ namespace Lab2_StreamsLINQ
                             Console.WriteLine("Incorrect format date");                                                    
                         break;
                     case 2:
-                        
+                        OrderSettings();
                         break;
                     case 3:
                         break;
@@ -219,6 +228,45 @@ namespace Lab2_StreamsLINQ
 
                 }
             } while (choice != 3);
+        }
+
+        public void OrderSettings()
+        {
+           // int choice = 0;
+            do
+            {
+                Console.WriteLine(ORDER_BY);
+                String line = Console.ReadLine();
+                if (int.TryParse(line, out orderBy) && orderBy > 0 && orderBy < 7)
+                    orderBy = Convert.ToInt32(line);
+                else
+                {
+                    Console.WriteLine("Incorrect command");
+                    continue;
+                }
+
+                //switch (choice)
+                //{
+                //    case 1:
+                        
+                //        break;
+                //    case 2:
+
+                //        break;
+                //    case 3:
+                //        break;
+                //    case 4:
+                //        break;
+                //    case 5:
+                //        break;
+                //    case 6:
+                //        break;
+                //    default:
+                //        Console.WriteLine("Incorrect command");
+                //        break;
+
+                //}
+            } while (orderBy != 6);
         }
 
         public static String GetFile()

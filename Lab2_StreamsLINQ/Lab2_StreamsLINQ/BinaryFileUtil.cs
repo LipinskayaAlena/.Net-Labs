@@ -44,53 +44,79 @@ namespace Lab2_StreamsLINQ
             return binaryTree;
         }
 
-        public static IEnumerable<Student> GetByDate(BinarySearchTree<Student> binaryTree, DateTime date, int numberLines)
+        public static IEnumerable<Student> GetByDate(BinarySearchTree<Student> binaryTree, DateTime date)
         {
             IEnumerable<Student> students = from student in binaryTree
                                             where student.Date.Equals(date)
                                             select student;
-            if (numberLines != -1)
-                return students.Take(numberLines);
             return students;
         }
 
-        public static IEnumerable<Student> GetByNameTest(BinarySearchTree<Student> binaryTree, String nameTest, int numberLines)
+        public static IEnumerable<Student> GetByNameTest(BinarySearchTree<Student> binaryTree, String nameTest)
         {
             IEnumerable<Student> students = from student in binaryTree
                                             where student.NameTest.ToLower().Equals(nameTest.ToLower()) || student.NameTest.ToLower().StartsWith(nameTest.ToLower())
                                             select student;
-            if (numberLines != -1)
-                return students.Take(numberLines);
             return students;
         }
 
-        public static IEnumerable<Student> GetByFirstName(BinarySearchTree<Student> binaryTree, String fName, int numberLines)
+        public static IEnumerable<Student> GetByFirstName(BinarySearchTree<Student> binaryTree, String fName)
         {
             IEnumerable<Student> students = from student in binaryTree
                                             where student.FirstName.ToLower().Equals(fName.ToLower()) || student.FirstName.ToLower().StartsWith(fName.ToLower())
                                             select student;
+            return students;
+        }
+
+        public static IEnumerable<Student> GetByNumberLines(IEnumerable<Student> students, int numberLines)
+        {
             if (numberLines != -1)
                 return students.Take(numberLines);
             return students;
         }
 
-        public static IEnumerable<Student> GetBySecondName(BinarySearchTree<Student> binaryTree, String sName, int numberLines)
+        public static IEnumerable<Student> OrderStudents(IEnumerable<Student> notOrderedStudents, int order)
+        {
+            switch(order)
+            {
+                case 1:
+                    return from student in notOrderedStudents
+                           orderby student.FirstName
+                           select student;
+                case 2:
+                    return from student in notOrderedStudents
+                           orderby student.SecondName
+                           select student;
+                case 3:
+                    return from student in notOrderedStudents
+                           orderby student.NameTest
+                           select student;
+                case 4:
+                    return from student in notOrderedStudents
+                           orderby student.Date
+                           select student;
+                case 5:
+                    return from student in notOrderedStudents
+                           orderby student.Rating
+                           select student;
+
+            }
+            return notOrderedStudents;
+        }
+
+        public static IEnumerable<Student> GetBySecondName(BinarySearchTree<Student> binaryTree, String sName)
         {
             IEnumerable<Student> students = from student in binaryTree
                                      where student.SecondName.ToLower().Equals(sName.ToLower()) || student.SecondName.ToLower().StartsWith(sName.ToLower())
                                      select student;
-            if (numberLines != -1)
-                return students.Take(numberLines);
             return students;
         }
 
-        public static IEnumerable<Student> GetByRating(BinarySearchTree<Student> binaryTree, int rating, int numberLines)
+        public static IEnumerable<Student> GetByRating(BinarySearchTree<Student> binaryTree, int rating)
         {
             IEnumerable<Student> students = from student in binaryTree
                                             where student.Rating == rating
                                             select student;
-            if (numberLines != -1)
-                return students.Take(numberLines);
             return students;
         }
     }
