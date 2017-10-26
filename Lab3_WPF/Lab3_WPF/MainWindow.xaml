@@ -1,0 +1,16 @@
+﻿<Window x:Class="Lab3_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab3_WPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Button Content="Select binary file" HorizontalAlignment="Left" Background="Green" Margin="19,10,0,0" VerticalAlignment="Top" Width="109" Click="Button_Select_File" Height="37"/>
+        
+        <TextBox HorizontalAlignment="Left" Name="outputConsole" Height="150" Margin="19,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="472"/>
+        <Label Content="Label" Name="nameOfFile" HorizontalAlignment="Left" Margin="143,15,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>
