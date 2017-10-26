@@ -5,12 +5,60 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab3_WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        ResizeMode="NoResize"
+        Title="MainWindow" Height="510" Width="525">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="334*"/>
+            <ColumnDefinition Width="183*"/>
+        </Grid.ColumnDefinitions>
         <Button Content="Select binary file" HorizontalAlignment="Left" Background="Green" Margin="19,10,0,0" VerticalAlignment="Top" Width="109" Click="Button_Select_File" Height="37"/>
-        
-        <TextBox HorizontalAlignment="Left" Name="outputConsole" Height="150" Margin="19,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="472"/>
+
+        <TextBox HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Name="outputConsole" Height="119" Margin="19,322,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="478" Grid.ColumnSpan="2"/>
         <Label Content="Label" Name="nameOfFile" HorizontalAlignment="Left" Margin="143,15,0,0" VerticalAlignment="Top"/>
+        <ListBox HorizontalAlignment="Left" Height="232" Margin="19,62,0,0" VerticalAlignment="Top" Width="181" Name="checkBoxCommands">
+            <StackPanel Margin="5" Orientation="Horizontal">
+                <Label VerticalContentAlignment="Center">Get all</Label>
+            </StackPanel>
+            <StackPanel Margin="5" Orientation="Horizontal">
+                <Label VerticalContentAlignment="Center">Get by first name</Label>
+            </StackPanel>
+            <StackPanel Margin="5" Orientation="Horizontal">
+                <Label VerticalContentAlignment="Center">Get by second name</Label>
+            </StackPanel>
+            <StackPanel Margin="5" Orientation="Horizontal">
+                <Label VerticalContentAlignment="Center">Get by name of test</Label>
+            </StackPanel>
+            <StackPanel Margin="5" Orientation="Horizontal">
+                <Label VerticalContentAlignment="Center">Get by date of passing test</Label>
+            </StackPanel>
+            <StackPanel Margin="5" Orientation="Horizontal">
+                <Label VerticalContentAlignment="Center">Get by rating</Label>
+            </StackPanel>
+        </ListBox>
+        <Label Name="labelNumberLines" Content="Number of lines" HorizontalAlignment="Left" Margin="223,62,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.149,0.499"/>
+        <Label Name="labelOrderBy" Content="Order by" HorizontalAlignment="Left" Margin="360,62,0,0" VerticalAlignment="Top" Width="66" Grid.ColumnSpan="2"/>
+        <Label Name="labelOrderType" Content="Order type" HorizontalAlignment="Left" Margin="360,134,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <ComboBox Name="comboBoxOrderType" HorizontalAlignment="Left" Margin="337,165,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
+        <ComboBox Name="comboBoxOrderBy" HorizontalAlignment="Left" Margin="337,88,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
+
+
+        <Grid Margin="223,88,4,356" Name="gridLineNumber">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="23" />
+            </Grid.ColumnDefinitions>
+            <TextBox HorizontalAlignment="Stretch" Name="textBoxLineNumber" TextChanged="lineNumber_TextChanged" Text="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            <StackPanel Orientation="Vertical" Grid.Column="1">
+                <Button Name="btnUp" Width="17" Click="Button_Up">
+                    <Image VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="Images/up.png"/>
+                </Button>
+                <Button Name="btnDown" Width="17" Click="Button_Down">
+                    <Image VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="Images/down.png" />
+                </Button>
+            </StackPanel>
+        </Grid>
+
 
     </Grid>
 </Window>
