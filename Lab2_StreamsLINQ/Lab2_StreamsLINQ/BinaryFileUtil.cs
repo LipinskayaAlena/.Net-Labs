@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using System.Windows.Forms;
 using Lab1_BinarySearchTree;
 namespace Lab2_StreamsLINQ
 {
@@ -9,8 +10,14 @@ namespace Lab2_StreamsLINQ
     {
         private BinaryFileUtil() { }
 
-        public static void Write(String fName, List<Student> students)
+        public static void Write(List<Student> students)
         {
+            String fName = GetFile();
+            if (!fName.EndsWith(".bin"))
+            {
+                Console.WriteLine("File is not binary");
+                return;
+            }
             using (BinaryWriter writer = new BinaryWriter(File.Open(fName, FileMode.OpenOrCreate)))
             {
                 foreach (Student student in students)
@@ -21,12 +28,29 @@ namespace Lab2_StreamsLINQ
                     writer.Write(student.Date.ToString());
                     writer.Write(student.Rating);
                 }
-
+                Console.WriteLine("File was written");
             }
         }
 
-        public static BinarySearchTree<Student> Read(String fName)
+        public static String GetFile()
         {
+            String fileName = "";
+            OpenFileDialog dialog = new OpenFileDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+                fileName = dialog.FileName;
+            return fileName;
+        }
+
+        public static BinarySearchTree<Student> Read()
+        {
+            String fName = GetFile();
+            if (!fName.EndsWith(".bin"))
+            {
+                Console.WriteLine("File is not binary");
+                return null;
+            }
+            
+
             BinarySearchTree<Student> binaryTree = new BinarySearchTree<Student>(new ComparatorFirstNameStudent());
             using (BinaryReader reader = new BinaryReader(File.Open(fName, FileMode.Open)))
             {

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lab1_BinarySearchTree;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace Lab2_StreamsLINQ
@@ -12,7 +11,7 @@ namespace Lab2_StreamsLINQ
     class UserController
     {
         private BinarySearchTree<Student> binaryTree = null;
-        private String fileName;
+        
         private String COMMANDS = "----------Lab2_streamLINQ-----------\n" +
             "1 - Choose binary file\n" +
             "2 - Create binary file\n" +
@@ -49,15 +48,14 @@ namespace Lab2_StreamsLINQ
             "2 - Descending\n" +
             "3 - Cancel\n" +
             "Your choice is: ";
-
-
-
+        
         private uint numberLines;
         private uint orderBy;
         private uint orderType;
 
         private IEnumerable<Student> students;
         private IEnumerable<Student> allStudents;
+
         public UserController() { }
 
 
@@ -79,16 +77,13 @@ namespace Lab2_StreamsLINQ
                 switch (choice)
                 {
                     case 1:
-                        fileName = GetFile();
-                        if (!fileName.EndsWith(".bin"))
-                            Console.WriteLine("File is not binary");
-                        else
-                            binaryTree = BinaryFileUtil.Read(fileName);
-                        ExecuteData();
+                        binaryTree = BinaryFileUtil.Read();
+                        if(binaryTree!= null)
+                            ExecuteData();                        
                         break;
                     case 2:
-                        BinaryFileUtil.Write(GetFile(), dataStudents);
-                        Console.WriteLine("File was written");
+                        BinaryFileUtil.Write(dataStudents);
+                        
                         break;
                     case 3:
                         break;
@@ -131,7 +126,6 @@ namespace Lab2_StreamsLINQ
                             CheckData(students);
                             foreach (Student student in BinaryFileUtil.OrderStudents(students, orderBy, orderType))
                                 Console.WriteLine(student.ToString());
-
                         }
                         else
                             Console.WriteLine("Incorrect format date");
@@ -270,15 +264,6 @@ namespace Lab2_StreamsLINQ
                 orderType = Convert.ToUInt32(line);
             else
                 Console.WriteLine("Incorrect command");
-        }
-
-        public static String GetFile()
-        {
-            String fileName = "";
-            OpenFileDialog dialog = new OpenFileDialog();
-            if (dialog.ShowDialog() == DialogResult.OK)
-                fileName = dialog.FileName;
-            return fileName;
         }
 
         static List<Student> dataStudents = new List<Student>
