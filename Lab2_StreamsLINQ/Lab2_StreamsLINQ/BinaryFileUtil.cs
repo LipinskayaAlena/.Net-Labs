@@ -46,59 +46,46 @@ namespace Lab2_StreamsLINQ
 
         public static IEnumerable<Student> GetByDate(BinarySearchTree<Student> binaryTree, DateTime date)
         {
-            IEnumerable<Student> students = from student in binaryTree
-                                            where student.Date.Equals(date)
-                                            select student;
-            return students;
+            return from student in binaryTree
+                   where student.Date.Equals(date)
+                   select student;
         }
 
         public static IEnumerable<Student> GetByNameTest(BinarySearchTree<Student> binaryTree, String nameTest)
         {
-            IEnumerable<Student> students = from student in binaryTree
-                                            where student.NameTest.ToLower().Equals(nameTest.ToLower()) || student.NameTest.ToLower().StartsWith(nameTest.ToLower())
-                                            select student;
-            return students;
+            return from student in binaryTree
+                   where student.NameTest.ToLower().Equals(nameTest.ToLower()) || student.NameTest.ToLower().StartsWith(nameTest.ToLower())
+                   select student;
         }
 
         public static IEnumerable<Student> GetByFirstName(BinarySearchTree<Student> binaryTree, String fName)
         {
-            IEnumerable<Student> students = from student in binaryTree
-                                            where student.FirstName.ToLower().Equals(fName.ToLower()) || student.FirstName.ToLower().StartsWith(fName.ToLower())
-                                            select student;
-            return students;
+            return from student in binaryTree
+                   where student.FirstName.ToLower().Equals(fName.ToLower()) || student.FirstName.ToLower().StartsWith(fName.ToLower())
+                   select student;
         }
 
-        public static IEnumerable<Student> GetByNumberLines(IEnumerable<Student> students, int numberLines)
+        public static IEnumerable<Student> GetByNumberLines(IEnumerable<Student> students, uint numberLines)
         {
-            if (numberLines != -1)
-                return students.Take(numberLines);
+            if (numberLines != 0)
+                return students.Take( (int) numberLines);
             return students;
         }
 
-        public static IEnumerable<Student> OrderStudents(IEnumerable<Student> notOrderedStudents, int order)
+        public static IEnumerable<Student> OrderStudents(IEnumerable<Student> notOrderedStudents, uint order, uint typeOrder)
         {
             switch(order)
             {
                 case 1:
-                    return from student in notOrderedStudents
-                           orderby student.FirstName
-                           select student;
+                    return (typeOrder == 2) ? notOrderedStudents.OrderByDescending(student => student.FirstName) : notOrderedStudents.OrderBy(student => student.FirstName);
                 case 2:
-                    return from student in notOrderedStudents
-                           orderby student.SecondName
-                           select student;
+                    return (typeOrder == 2) ? notOrderedStudents.OrderByDescending(student => student.SecondName) : notOrderedStudents.OrderBy(student => student.SecondName);
                 case 3:
-                    return from student in notOrderedStudents
-                           orderby student.NameTest
-                           select student;
+                    return (typeOrder == 2) ? notOrderedStudents.OrderByDescending(student => student.NameTest) : notOrderedStudents.OrderBy(student => student.NameTest);
                 case 4:
-                    return from student in notOrderedStudents
-                           orderby student.Date
-                           select student;
+                    return (typeOrder == 2) ? notOrderedStudents.OrderByDescending(student => student.Date) : notOrderedStudents.OrderBy(student => student.Date);
                 case 5:
-                    return from student in notOrderedStudents
-                           orderby student.Rating
-                           select student;
+                    return (typeOrder == 2) ? notOrderedStudents.OrderByDescending(student => student.Rating) : notOrderedStudents.OrderBy(student => student.Rating);
 
             }
             return notOrderedStudents;
@@ -106,18 +93,12 @@ namespace Lab2_StreamsLINQ
 
         public static IEnumerable<Student> GetBySecondName(BinarySearchTree<Student> binaryTree, String sName)
         {
-            IEnumerable<Student> students = from student in binaryTree
-                                     where student.SecondName.ToLower().Equals(sName.ToLower()) || student.SecondName.ToLower().StartsWith(sName.ToLower())
-                                     select student;
-            return students;
+            return binaryTree.Where(student => student.SecondName.ToLower().Equals(sName.ToLower()) || student.SecondName.ToLower().StartsWith(sName.ToLower()));
         }
 
         public static IEnumerable<Student> GetByRating(BinarySearchTree<Student> binaryTree, int rating)
         {
-            IEnumerable<Student> students = from student in binaryTree
-                                            where student.Rating == rating
-                                            select student;
-            return students;
+            return binaryTree.Where(student => student.Rating == rating);
         }
     }
 }
