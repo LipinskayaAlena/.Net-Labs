@@ -22,12 +22,18 @@ namespace Lab3_WPF
         UInt64 Maximum;
         UInt64 Minimum;
         UInt64 numberLines;
+
+        int get_data_commands;
+        int orderBy;
+        int orderType;
+
         public MainWindow()
         {
             InitializeComponent();
             Clear();
             Maximum = UInt64.MaxValue;
             Minimum = UInt64.MinValue;
+
         }
 
         private void Button_Select_File(object sender, RoutedEventArgs e)
@@ -39,7 +45,7 @@ namespace Lab3_WPF
             else
             {
                 nameOfFile.Visibility = Visibility.Visible;
-                checkBoxCommands.Visibility = Visibility.Visible;
+                listBoxCommands.Visibility = Visibility.Visible;
                 nameOfFile.Content = BinaryFileUtil.FILE_NAME;
                 showPreSettings();
             }
@@ -90,7 +96,7 @@ namespace Lab3_WPF
         {
             nameOfFile.Visibility = Visibility.Hidden;
             outputConsole.Text = "";
-            checkBoxCommands.Visibility = Visibility.Hidden;
+            listBoxCommands.Visibility = Visibility.Hidden;
             labelNumberLines.Visibility = Visibility.Hidden;
             labelOrderBy.Visibility = Visibility.Hidden;
             labelOrderType.Visibility = Visibility.Hidden;
@@ -126,5 +132,19 @@ namespace Lab3_WPF
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private void listBoxCommands_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            get_data_commands = listBoxCommands.SelectedIndex;
+        }
+
+        private void comboBoxOrderBy_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            orderBy = comboBoxOrderBy.SelectedIndex;
+        }
+
+        private void comboBoxOrderType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            orderType = comboBoxOrderType.SelectedIndex;
+        }
     }
 }

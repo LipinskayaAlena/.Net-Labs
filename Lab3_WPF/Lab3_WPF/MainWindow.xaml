@@ -16,8 +16,8 @@
 
         <TextBox HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Name="outputConsole" Height="119" Margin="19,322,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="478" Grid.ColumnSpan="2"/>
         <Label Content="Label" Name="nameOfFile" HorizontalAlignment="Left" Margin="143,15,0,0" VerticalAlignment="Top"/>
-        <ListBox HorizontalAlignment="Left" Height="232" Margin="19,62,0,0" VerticalAlignment="Top" Width="181" Name="checkBoxCommands">
-            <StackPanel Margin="5" Orientation="Horizontal">
+        <ListBox SelectedIndex="0" HorizontalAlignment="Left" Height="232" Margin="19,62,0,0" VerticalAlignment="Top" Width="181" Name="listBoxCommands" SelectionChanged="listBoxCommands_SelectionChanged">
+            <StackPanel Margin="5"  Orientation="Horizontal" >
                 <Label VerticalContentAlignment="Center">Get all</Label>
             </StackPanel>
             <StackPanel Margin="5" Orientation="Horizontal">
@@ -39,11 +39,11 @@
         <Label Name="labelNumberLines" Content="Number of lines" HorizontalAlignment="Left" Margin="223,62,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.149,0.499"/>
         <Label Name="labelOrderBy" Content="Order by" HorizontalAlignment="Left" Margin="55,62,0,0" VerticalAlignment="Top" Width="66" Grid.Column="1"/>
         <Label Name="labelOrderType" Content="Order type" HorizontalAlignment="Left" Margin="54,139,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <ComboBox Name="comboBoxOrderType" HorizontalAlignment="Left" Margin="23,165,0,0" VerticalAlignment="Top" Width="128" Grid.Column="1">
+        <ComboBox Name="comboBoxOrderType" HorizontalAlignment="Left" Margin="23,165,0,0" VerticalAlignment="Top" Width="128" Grid.Column="1" SelectionChanged="comboBoxOrderType_SelectionChanged">
             <ComboBoxItem IsSelected="True" Content="Uprising"/>
             <ComboBoxItem Content="Descending"/>
         </ComboBox>
-        <ComboBox Name="comboBoxOrderBy" HorizontalAlignment="Left" Margin="23,88,0,0" VerticalAlignment="Top" Width="128" Grid.Column="1">
+        <ComboBox Name="comboBoxOrderBy" HorizontalAlignment="Left" Margin="23,88,0,0" VerticalAlignment="Top" Width="128" Grid.Column="1" SelectionChanged="comboBoxOrderBy_SelectionChanged">
             <ComboBoxItem IsSelected="True" Content=""/>
             <ComboBoxItem Content="First Name"/>
             <ComboBoxItem Content="Second Name"/>
