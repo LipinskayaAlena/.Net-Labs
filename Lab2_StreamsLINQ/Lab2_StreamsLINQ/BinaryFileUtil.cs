@@ -89,11 +89,14 @@ namespace Lab2_StreamsLINQ
                    select student;
         }
 
-        public static IEnumerable<Student> GetByNumberLines(IEnumerable<Student> students, uint numberLines)
+        public static IEnumerable<Student> GetByNumberLines(IEnumerable<Student> students, uint? numberLines)
         {
-            if (numberLines != 0)
+            if (numberLines == null)
+                return students;
+            if (numberLines <= students.Count())
                 return students.Take( (int) numberLines);
-            return students;
+           
+            return Enumerable.Empty<Student>();
         }
 
         public static IEnumerable<Student> OrderStudents(IEnumerable<Student> notOrderedStudents, uint order, uint typeOrder)

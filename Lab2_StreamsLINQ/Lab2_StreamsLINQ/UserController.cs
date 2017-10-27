@@ -49,10 +49,10 @@ namespace Lab2_StreamsLINQ
             "3 - Cancel\n" +
             "Your choice is: ";
         
-        private uint numberLines;
+        public uint? numberLines;
         private uint orderBy;
         private uint orderType;
-
+        
         private IEnumerable<Student> students;
         private IEnumerable<Student> allStudents;
 
@@ -108,7 +108,7 @@ namespace Lab2_StreamsLINQ
                     Console.WriteLine("Incorrect command");
                     continue;
                 }
-                numberLines = 0;
+                numberLines = null;
                 orderBy = 0;
                 orderType = 0;
 
@@ -184,8 +184,9 @@ namespace Lab2_StreamsLINQ
                         break;
                     case 6:
                         PreSettings();
-                        students = BinaryFileUtil.GetByNumberLines(binaryTree, numberLines);
-                        foreach (Student student in BinaryFileUtil.OrderStudents(students, orderBy, orderType))
+                        students = BinaryFileUtil.OrderStudents(BinaryFileUtil.GetByNumberLines(binaryTree, numberLines), orderBy, orderType);
+                        CheckData(students);
+                        foreach (Student student in students)
                             Console.WriteLine(student.ToString());
                         Console.ReadKey();
                         break;
@@ -226,10 +227,11 @@ namespace Lab2_StreamsLINQ
                     case 1:
                         Console.WriteLine("Enter number of lines: ");
                         String lineNumber = Console.ReadLine();
-                        if (lineNumber.ToLower().Equals("all"))
-                            numberLines = 0;
-                        else if (!UInt32.TryParse(lineNumber, out numberLines))
-                            Console.WriteLine("Incorrect format date");                                                    
+                        uint numLines;
+                        if (!UInt32.TryParse(lineNumber, out numLines))
+                            Console.WriteLine("Incorrect format date");
+                        else
+                            numberLines = numLines;
                         break;
                     case 2:
                         OrderSettings();
