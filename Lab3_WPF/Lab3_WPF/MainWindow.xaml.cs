@@ -45,7 +45,10 @@ namespace Lab3_WPF
             Clear();
             binaryTree = BinaryFileUtil.Read();
             if (binaryTree == null || binaryTree.Count == 0)
+            {
+                outputConsole.Foreground = Brushes.Red;
                 outputConsole.Text = "Error reading file. Check that this file have extension .bin and that this file is not empty";
+            }
             else
             {
                 nameOfFile.Visibility = Visibility.Visible;
@@ -63,7 +66,7 @@ namespace Lab3_WPF
             if (!UInt32.TryParse(tb.Text, out numLines))
             {
                 tb.Text = "";
-                NumberLines = 0;
+                numberLines = null;
             }
             else
                 numberLines = numLines;
@@ -75,9 +78,10 @@ namespace Lab3_WPF
         private void Button_Up(object sender, RoutedEventArgs e)
         {
             if (NumberLines < Maximum)
-            {
                 NumberLines++;
-            }
+             else if(NumberLines == null)
+                NumberLines = 0;
+            
             textBoxLineNumber.Text = NumberLines.ToString();
         }
 
@@ -86,8 +90,13 @@ namespace Lab3_WPF
             if (NumberLines > Minimum)
             {
                 NumberLines--;
+                textBoxLineNumber.Text = NumberLines.ToString();
+            } else
+            {
+                textBoxLineNumber.Text = "";
+                NumberLines = null;
             }
-            textBoxLineNumber.Text = NumberLines.ToString();
+            
         }
 
         private void ShowPreSettings()
@@ -237,7 +246,7 @@ namespace Lab3_WPF
             datePassTest = DateTime.Parse(datePicker.Text);
         }
 
-        private void buttonGetData_Click(object sender, RoutedEventArgs e)
+        private void ButtonGetData_Click(object sender, RoutedEventArgs e)
         {
             outputConsole.Foreground = Brushes.Black;
             outputConsole.Text = "";
@@ -250,15 +259,34 @@ namespace Lab3_WPF
                         outputConsole.Text += student.ToString() + "\n";
                     break;
                 case 1:
-
+                    students = BinaryFileUtil.OrderStudents(BinaryFileUtil.GetByNumberLines(BinaryFileUtil.GetByFirstName(binaryTree, Info), numberLines), (uint)orderBy, (uint)orderType);
+                    CheckData(students);
+                    foreach (Student student in students)
+                        outputConsole.Text += student.ToString() + "\n";
                     break;
                 case 2:
+                    students = BinaryFileUtil.OrderStudents(BinaryFileUtil.GetByNumberLines(BinaryFileUtil.GetBySecondName(binaryTree, Info), numberLines), (uint)orderBy, (uint)orderType);
+                    CheckData(students);
+                    foreach (Student student in students)
+                        outputConsole.Text += student.ToString() + "\n";
                     break;
                 case 3:
+                    students = BinaryFileUtil.OrderStudents(BinaryFileUtil.GetByNumberLines(BinaryFileUtil.GetByNameTest(binaryTree, Info), numberLines), (uint)orderBy, (uint)orderType);
+                    CheckData(students);
+                    foreach (Student student in students)
+                        outputConsole.Text += student.ToString() + "\n";
                     break;
                 case 4:
+                    students = BinaryFileUtil.OrderStudents(BinaryFileUtil.GetByNumberLines(BinaryFileUtil.GetByDate(binaryTree, datePassTest), numberLines), (uint)orderBy, (uint)orderType);
+                    CheckData(students);
+                    foreach (Student student in students)
+                        outputConsole.Text += student.ToString() + "\n";
                     break;
                 case 5:
+                    students = BinaryFileUtil.OrderStudents(BinaryFileUtil.GetByNumberLines(BinaryFileUtil.GetByRating(binaryTree, UInt16.Parse(Info)), numberLines), (uint)orderBy, (uint)orderType);
+                    CheckData(students);
+                    foreach (Student student in students)
+                        outputConsole.Text += student.ToString() + "\n";
                     break;
             }
         }

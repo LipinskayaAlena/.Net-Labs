@@ -71,7 +71,7 @@
         </Grid>
         <Label Content="Label" HorizontalAlignment="Left" Margin="223,139,0,0" VerticalAlignment="Top" Name="labelInfo"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="223,165,0,0" TextWrapping="Wrap" Name="textBoxInfo" TextChanged="Info_TextChanged" VerticalAlignment="Top" Width="102" Text="{Binding Path=Info, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-        <Button Content="GET" HorizontalAlignment="Left" Background="Green" Margin="42,260,0,0" VerticalAlignment="Top" Width="109" Height="34" Name="buttonGetData" Grid.Column="1" Click="buttonGetData_Click"/>
+        <Button Content="GET" HorizontalAlignment="Left" Background="Green" Margin="42,260,0,0" VerticalAlignment="Top" Width="109" Height="34" Name="buttonGetData" Grid.Column="1" Click="ButtonGetData_Click"/>
         <DatePicker HorizontalAlignment="Left" Margin="223,163,0,0" VerticalAlignment="Top" Name="datePicker" SelectedDate="{x:Static sys:DateTime.Now}" SelectedDateChanged="DatePicker_SelectedDateChanged" SelectedDateFormat="Short">
             <DatePicker.Resources>
                 <Style TargetType="DatePickerTextBox">
