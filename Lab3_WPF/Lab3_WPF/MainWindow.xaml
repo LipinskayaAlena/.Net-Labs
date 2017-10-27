@@ -15,9 +15,9 @@
         </Grid.ColumnDefinitions>
         <Button Content="SELECT FILE" HorizontalAlignment="Left" Background="Green" Margin="19,10,0,0" VerticalAlignment="Top" Width="109" Click="Button_Select_File" Height="37"/>
 
-        <TextBox HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Disabled" IsHitTestVisible="False" ScrollViewer.VerticalScrollBarVisibility="Auto" Name="outputConsole" Height="119" Margin="19,322,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="478" Grid.ColumnSpan="2"/>
+        <TextBox HorizontalAlignment="Left"  ScrollViewer.VerticalScrollBarVisibility="Auto" Name="outputConsole" Height="119" Margin="19,322,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="478" Grid.ColumnSpan="2"/>
         <Label Content="Label" Name="nameOfFile" HorizontalAlignment="Left" Margin="143,15,0,0" VerticalAlignment="Top"/>
-        <ListBox SelectedIndex="0" HorizontalAlignment="Left" Height="232" Margin="19,62,0,0" VerticalAlignment="Top" Width="181" Name="listBoxCommands" SelectionChanged="listBoxCommands_SelectionChanged">
+        <ListBox SelectedIndex="0" HorizontalAlignment="Left" Height="232" Margin="19,62,0,0" VerticalAlignment="Top" Width="181" Name="listBoxCommands" SelectionChanged="ListBoxCommands_SelectionChanged">
             <StackPanel Margin="5"  Orientation="Horizontal" >
                 <Label VerticalContentAlignment="Center">Get all</Label>
             </StackPanel>
@@ -40,11 +40,11 @@
         <Label Name="labelNumberLines" Content="Number of lines" HorizontalAlignment="Left" Margin="223,62,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.149,0.499"/>
         <Label Name="labelOrderBy" Content="Order by" HorizontalAlignment="Left" Margin="55,62,0,0" VerticalAlignment="Top" Width="66" Grid.Column="1"/>
         <Label Name="labelOrderType" Content="Order type" HorizontalAlignment="Left" Margin="54,139,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <ComboBox Name="comboBoxOrderType" HorizontalAlignment="Left" Margin="23,165,0,0" VerticalAlignment="Top" Width="128" Grid.Column="1" SelectionChanged="comboBoxOrderType_SelectionChanged">
+        <ComboBox Name="comboBoxOrderType" HorizontalAlignment="Left" Margin="23,165,0,0" VerticalAlignment="Top" Width="128" Grid.Column="1" SelectionChanged="ComboBoxOrderType_SelectionChanged">
             <ComboBoxItem IsSelected="True" Content="Uprising"/>
             <ComboBoxItem Content="Descending"/>
         </ComboBox>
-        <ComboBox Name="comboBoxOrderBy" HorizontalAlignment="Left" Margin="23,88,0,0" VerticalAlignment="Top" Width="128" Grid.Column="1" SelectionChanged="comboBoxOrderBy_SelectionChanged">
+        <ComboBox Name="comboBoxOrderBy" HorizontalAlignment="Left" Margin="23,88,0,0" VerticalAlignment="Top" Width="128" Grid.Column="1" SelectionChanged="ComboBoxOrderBy_SelectionChanged">
             <ComboBoxItem IsSelected="True" Content=""/>
             <ComboBoxItem Content="First Name"/>
             <ComboBoxItem Content="Second Name"/>
@@ -59,7 +59,7 @@
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="23" />
             </Grid.ColumnDefinitions>
-            <TextBox HorizontalAlignment="Stretch" Name="textBoxLineNumber" TextChanged="lineNumber_TextChanged" Text="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            <TextBox HorizontalAlignment="Stretch" Name="textBoxLineNumber" TextChanged="LineNumber_TextChanged" Text="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
             <StackPanel Orientation="Vertical" Grid.Column="1">
                 <Button Name="btnUp" Width="17" Click="Button_Up">
                     <Image VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="Images/up.png"/>
@@ -70,9 +70,9 @@
             </StackPanel>
         </Grid>
         <Label Content="Label" HorizontalAlignment="Left" Margin="223,139,0,0" VerticalAlignment="Top" Name="labelInfo"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="223,165,0,0" TextWrapping="Wrap" Name="textBoxInfo" TextChanged="info_TextChanged" VerticalAlignment="Top" Width="102" Text="{Binding Path=Info, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-        <Button Content="GET" HorizontalAlignment="Left" Background="Green" Margin="42,260,0,0" VerticalAlignment="Top" Width="109" Height="34" Name="buttonGetData" Grid.Column="1"/>
-        <DatePicker HorizontalAlignment="Left" Margin="223,163,0,0" VerticalAlignment="Top" Name="datePicker" SelectedDate="{x:Static sys:DateTime.Now}" SelectedDateChanged="datePicker_SelectedDateChanged" SelectedDateFormat="Short">
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="223,165,0,0" TextWrapping="Wrap" Name="textBoxInfo" TextChanged="Info_TextChanged" VerticalAlignment="Top" Width="102" Text="{Binding Path=Info, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+        <Button Content="GET" HorizontalAlignment="Left" Background="Green" Margin="42,260,0,0" VerticalAlignment="Top" Width="109" Height="34" Name="buttonGetData" Grid.Column="1" Click="buttonGetData_Click"/>
+        <DatePicker HorizontalAlignment="Left" Margin="223,163,0,0" VerticalAlignment="Top" Name="datePicker" SelectedDate="{x:Static sys:DateTime.Now}" SelectedDateChanged="DatePicker_SelectedDateChanged" SelectedDateFormat="Short">
             <DatePicker.Resources>
                 <Style TargetType="DatePickerTextBox">
                     <Setter Property="IsReadOnly" Value="True"/>

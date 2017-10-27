@@ -91,9 +91,9 @@ namespace Lab3_WPF
 
         public static IEnumerable<Student> GetByNumberLines(IEnumerable<Student> students, uint numberLines)
         {
-            if (numberLines != 0)
+            if (numberLines != 0 && numberLines <= students.Count())
                 return students.Take((int)numberLines);
-            return students;
+            return Enumerable.Empty<Student>();
         }
 
         public static IEnumerable<Student> OrderStudents(IEnumerable<Student> notOrderedStudents, uint order, uint typeOrder)

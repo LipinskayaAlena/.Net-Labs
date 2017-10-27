@@ -19,9 +19,10 @@ namespace Lab3_WPF
     public partial class MainWindow : Window
     {
         BinarySearchTree<Student> binaryTree;
-        UInt64 Maximum;
-        UInt64 Minimum;
-        UInt64 numberLines;
+        private IEnumerable<Student> students;
+        UInt32 Maximum;
+        UInt32 Minimum;
+        UInt32 numberLines;
 
         int get_data_commands;
         int orderBy;
@@ -34,8 +35,8 @@ namespace Lab3_WPF
         {
             InitializeComponent();
             Clear();
-            Maximum = UInt64.MaxValue;
-            Minimum = UInt64.MinValue;
+            Maximum = UInt32.MaxValue;
+            Minimum = UInt32.MinValue;
 
         }
 
@@ -50,15 +51,15 @@ namespace Lab3_WPF
                 nameOfFile.Visibility = Visibility.Visible;
                 listBoxCommands.Visibility = Visibility.Visible;
                 nameOfFile.Content = BinaryFileUtil.FILE_NAME;
-                showPreSettings();
+                ShowPreSettings();
             }
 
         }
 
-        private void lineNumber_TextChanged(object sender, TextChangedEventArgs e)
+        private void LineNumber_TextChanged(object sender, TextChangedEventArgs e)
         {
             var tb = (TextBox)sender;
-            if (!UInt64.TryParse(tb.Text, out numberLines)) {
+            if (!UInt32.TryParse(tb.Text, out numberLines)) {
                 tb.Text = "";
                 NumberLines = 0;
             }
@@ -85,7 +86,7 @@ namespace Lab3_WPF
             textBoxLineNumber.Text = NumberLines.ToString();
         }
 
-        private void showPreSettings()
+        private void ShowPreSettings()
         {
             labelNumberLines.Visibility = Visibility.Visible;
             labelOrderBy.Visibility = Visibility.Visible;
@@ -107,10 +108,11 @@ namespace Lab3_WPF
             labelOrderType.Visibility = Visibility.Hidden;
             comboBoxOrderBy.Visibility = Visibility.Hidden;
             comboBoxOrderType.Visibility = Visibility.Hidden;
-            
+            comboBoxOrderType.SelectedIndex = 0;
+            comboBoxOrderBy.SelectedIndex = 0;
             gridLineNumber.Visibility = Visibility.Hidden;
             listBoxCommands.SelectedIndex = 0;
-
+            textBoxLineNumber.Text = "";
             labelInfo.Visibility = Visibility.Hidden;
             textBoxInfo.Visibility = Visibility.Hidden;
             datePicker.Visibility = Visibility.Hidden;
@@ -140,7 +142,7 @@ namespace Lab3_WPF
             }
         }
 
-        public UInt64 NumberLines
+        public uint NumberLines
         {
             get { return numberLines; }
 
@@ -148,7 +150,7 @@ namespace Lab3_WPF
             {
                 if (numberLines == value) return;
 
-                if (UInt64.TryParse(value.ToString(), out numberLines))
+                if (UInt32.TryParse(value.ToString(), out numberLines))
                 {
                     numberLines = value;
                 } else
@@ -165,11 +167,11 @@ namespace Lab3_WPF
         
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChangedEventHandler Handler = PropertyChanged;
+            if (Handler != null) Handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void listBoxCommands_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ListBoxCommands_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
             String[] data = new String[] { "First Name", "Second Name", "Name of test", "Date of pass", "Rating"};
@@ -183,12 +185,9 @@ namespace Lab3_WPF
             } else if (get_data_commands != 0)
                 ShowFieldEnterInfo(data[get_data_commands - 1]);
             
-                
-            
-
         }
 
-        private void info_TextChanged(object sender, TextChangedEventArgs e)
+        private void Info_TextChanged(object sender, TextChangedEventArgs e)
         {
             var tb = (TextBox)sender;
             Info = tb.Text;
@@ -219,19 +218,56 @@ namespace Lab3_WPF
             
         }
 
-        private void comboBoxOrderBy_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ComboBoxOrderBy_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             orderBy = comboBoxOrderBy.SelectedIndex;
         }
 
-        private void comboBoxOrderType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ComboBoxOrderType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            orderType = comboBoxOrderType.SelectedIndex;
+            orderType = comboBoxOrderType.SelectedIndex + 1;
         }
 
-        private void datePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             datePassTest = DateTime.Parse(datePicker.Text);
+        }
+
+        private void buttonGetData_Click(object sender, RoutedEventArgs e)
+        {
+            outputConsole.Foreground = Brushes.Black;
+            outputConsole.Text = "";
+            switch (get_data_commands)
+            {
+                case 0:
+                    students = BinaryFileUtil.OrderStudents(BinaryFileUtil.GetByNumberLines(binaryTree, numberLines), (uint)orderBy, (uint)orderType);
+                    CheckData(students);
+                    foreach (Student student in students)
+                        outputConsole.Text += student.ToString() + "\n";
+                    break;
+                case 1:
+
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+            }
+        }
+
+
+        public void CheckData(IEnumerable<Student> stds)
+        {
+            if (stds.Count() == 0)
+            {
+                outputConsole.Text = "There are not students with such parameters or parameter of lines number are greater than number of students";
+                outputConsole.Foreground = Brushes.Red;
+            }
+
         }
     }
 }
