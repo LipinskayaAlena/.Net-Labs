@@ -37,10 +37,20 @@
             </StackPanel>
         </ListBox>
         <Label Name="labelNumberLines" Content="Number of lines" HorizontalAlignment="Left" Margin="223,62,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.149,0.499"/>
-        <Label Name="labelOrderBy" Content="Order by" HorizontalAlignment="Left" Margin="360,62,0,0" VerticalAlignment="Top" Width="66" Grid.ColumnSpan="2"/>
-        <Label Name="labelOrderType" Content="Order type" HorizontalAlignment="Left" Margin="360,134,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-        <ComboBox Name="comboBoxOrderType" HorizontalAlignment="Left" Margin="337,165,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
-        <ComboBox Name="comboBoxOrderBy" HorizontalAlignment="Left" Margin="337,88,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
+        <Label Name="labelOrderBy" Content="Order by" HorizontalAlignment="Left" Margin="55,62,0,0" VerticalAlignment="Top" Width="66" Grid.Column="1"/>
+        <Label Name="labelOrderType" Content="Order type" HorizontalAlignment="Left" Margin="54,139,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <ComboBox Name="comboBoxOrderType" HorizontalAlignment="Left" Margin="23,165,0,0" VerticalAlignment="Top" Width="128" Grid.Column="1">
+            <ComboBoxItem IsSelected="True" Content="Uprising"/>
+            <ComboBoxItem Content="Descending"/>
+        </ComboBox>
+        <ComboBox Name="comboBoxOrderBy" HorizontalAlignment="Left" Margin="23,88,0,0" VerticalAlignment="Top" Width="128" Grid.Column="1">
+            <ComboBoxItem IsSelected="True" Content=""/>
+            <ComboBoxItem Content="First Name"/>
+            <ComboBoxItem Content="Second Name"/>
+            <ComboBoxItem Content="Name of test"/>
+            <ComboBoxItem Content="Date of passing test"/>
+            <ComboBoxItem Content="Rating"/>
+        </ComboBox>
 
 
         <Grid Margin="223,88,4,356" Name="gridLineNumber">

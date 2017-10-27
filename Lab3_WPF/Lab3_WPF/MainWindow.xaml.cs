@@ -16,9 +16,6 @@ using Lab1_BinarySearchTree;
 using System.ComponentModel;
 namespace Lab3_WPF
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         BinarySearchTree<Student> binaryTree;
