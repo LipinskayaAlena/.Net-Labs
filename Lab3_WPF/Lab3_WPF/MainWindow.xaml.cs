@@ -22,7 +22,7 @@ namespace Lab3_WPF
         private IEnumerable<Student> students;
         UInt32 Maximum;
         UInt32 Minimum;
-        UInt32 numberLines;
+        uint? numberLines;
 
         int get_data_commands;
         int orderBy;
@@ -59,17 +59,21 @@ namespace Lab3_WPF
         private void LineNumber_TextChanged(object sender, TextChangedEventArgs e)
         {
             var tb = (TextBox)sender;
-            if (!UInt32.TryParse(tb.Text, out numberLines)) {
+            uint numLines;
+            if (!UInt32.TryParse(tb.Text, out numLines))
+            {
                 tb.Text = "";
                 NumberLines = 0;
             }
-            if (NumberLines < Minimum) NumberLines = Minimum;
+            else
+                numberLines = numLines;
+
+            if (NumberLines < Minimum) NumberLines = null;
             if (NumberLines > Maximum) NumberLines = Maximum;
         }
 
         private void Button_Up(object sender, RoutedEventArgs e)
         {
-            
             if (NumberLines < Maximum)
             {
                 NumberLines++;
@@ -142,15 +146,15 @@ namespace Lab3_WPF
             }
         }
 
-        public uint NumberLines
+        public uint? NumberLines
         {
             get { return numberLines; }
 
             set
             {
                 if (numberLines == value) return;
-
-                if (UInt32.TryParse(value.ToString(), out numberLines))
+                uint numLines;
+                if (UInt32.TryParse(value.ToString(), out numLines))
                 {
                     numberLines = value;
                 } else

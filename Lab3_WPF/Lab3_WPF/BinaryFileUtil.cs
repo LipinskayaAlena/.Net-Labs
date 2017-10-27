@@ -89,10 +89,13 @@ namespace Lab3_WPF
                    select student;
         }
 
-        public static IEnumerable<Student> GetByNumberLines(IEnumerable<Student> students, uint numberLines)
+        public static IEnumerable<Student> GetByNumberLines(IEnumerable<Student> students, uint? numberLines)
         {
-            if (numberLines != 0 && numberLines <= students.Count())
+            if (numberLines == null)
+                return students;
+            if (numberLines <= students.Count())
                 return students.Take((int)numberLines);
+
             return Enumerable.Empty<Student>();
         }
 
