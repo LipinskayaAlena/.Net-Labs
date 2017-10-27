@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab3_WPF"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         ResizeMode="NoResize"
         Title="MainWindow" Height="510" Width="525">
@@ -12,9 +13,9 @@
             <ColumnDefinition Width="334*"/>
             <ColumnDefinition Width="183*"/>
         </Grid.ColumnDefinitions>
-        <Button Content="Select binary file" HorizontalAlignment="Left" Background="Green" Margin="19,10,0,0" VerticalAlignment="Top" Width="109" Click="Button_Select_File" Height="37"/>
+        <Button Content="SELECT FILE" HorizontalAlignment="Left" Background="Green" Margin="19,10,0,0" VerticalAlignment="Top" Width="109" Click="Button_Select_File" Height="37"/>
 
-        <TextBox HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Name="outputConsole" Height="119" Margin="19,322,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="478" Grid.ColumnSpan="2"/>
+        <TextBox HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Disabled" IsHitTestVisible="False" ScrollViewer.VerticalScrollBarVisibility="Auto" Name="outputConsole" Height="119" Margin="19,322,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="478" Grid.ColumnSpan="2"/>
         <Label Content="Label" Name="nameOfFile" HorizontalAlignment="Left" Margin="143,15,0,0" VerticalAlignment="Top"/>
         <ListBox SelectedIndex="0" HorizontalAlignment="Left" Height="232" Margin="19,62,0,0" VerticalAlignment="Top" Width="181" Name="listBoxCommands" SelectionChanged="listBoxCommands_SelectionChanged">
             <StackPanel Margin="5"  Orientation="Horizontal" >
@@ -68,6 +69,16 @@
                 </Button>
             </StackPanel>
         </Grid>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="223,139,0,0" VerticalAlignment="Top" Name="labelInfo"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="223,165,0,0" TextWrapping="Wrap" Name="textBoxInfo" TextChanged="info_TextChanged" VerticalAlignment="Top" Width="102" Text="{Binding Path=Info, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+        <Button Content="GET" HorizontalAlignment="Left" Background="Green" Margin="42,260,0,0" VerticalAlignment="Top" Width="109" Height="34" Name="buttonGetData" Grid.Column="1"/>
+        <DatePicker HorizontalAlignment="Left" Margin="223,163,0,0" VerticalAlignment="Top" Name="datePicker" SelectedDate="{x:Static sys:DateTime.Now}" SelectedDateChanged="datePicker_SelectedDateChanged" SelectedDateFormat="Short">
+            <DatePicker.Resources>
+                <Style TargetType="DatePickerTextBox">
+                    <Setter Property="IsReadOnly" Value="True"/>
+                </Style>
+            </DatePicker.Resources>
+        </DatePicker>
 
 
     </Grid>

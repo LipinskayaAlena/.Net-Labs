@@ -27,6 +27,9 @@ namespace Lab3_WPF
         int orderBy;
         int orderType;
 
+        String info;
+        DateTime datePassTest;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -57,29 +60,29 @@ namespace Lab3_WPF
             var tb = (TextBox)sender;
             if (!UInt64.TryParse(tb.Text, out numberLines)) {
                 tb.Text = "";
-                numberLines = 0;
+                NumberLines = 0;
             }
-            if (numberLines < Minimum) numberLines = Minimum;
-            if (numberLines > Maximum) numberLines = Maximum;
+            if (NumberLines < Minimum) NumberLines = Minimum;
+            if (NumberLines > Maximum) NumberLines = Maximum;
         }
 
         private void Button_Up(object sender, RoutedEventArgs e)
         {
             
-            if (numberLines < Maximum)
+            if (NumberLines < Maximum)
             {
-                numberLines++;
+                NumberLines++;
             }
-            textBoxLineNumber.Text = numberLines.ToString();
+            textBoxLineNumber.Text = NumberLines.ToString();
         }
 
         private void Button_Down(object sender, RoutedEventArgs e)
         {
-            if (numberLines > Minimum)
+            if (NumberLines > Minimum)
             {
-                numberLines--;
+                NumberLines--;
             }
-            textBoxLineNumber.Text = numberLines.ToString();
+            textBoxLineNumber.Text = NumberLines.ToString();
         }
 
         private void showPreSettings()
@@ -90,6 +93,8 @@ namespace Lab3_WPF
             comboBoxOrderBy.Visibility = Visibility.Visible;
             comboBoxOrderType.Visibility = Visibility.Visible;
             gridLineNumber.Visibility = Visibility.Visible;
+            buttonGetData.Visibility = Visibility.Visible;
+
         }
 
         private void Clear()
@@ -102,8 +107,37 @@ namespace Lab3_WPF
             labelOrderType.Visibility = Visibility.Hidden;
             comboBoxOrderBy.Visibility = Visibility.Hidden;
             comboBoxOrderType.Visibility = Visibility.Hidden;
-            textBoxLineNumber.Text = "0";
+            
             gridLineNumber.Visibility = Visibility.Hidden;
+            listBoxCommands.SelectedIndex = 0;
+
+            labelInfo.Visibility = Visibility.Hidden;
+            textBoxInfo.Visibility = Visibility.Hidden;
+            datePicker.Visibility = Visibility.Hidden;
+
+            buttonGetData.Visibility = Visibility.Hidden;
+        }
+
+        public String Info
+        {
+            get { return info; }
+
+            set
+            {
+                UInt16 rating = 0;
+                if(get_data_commands == 5 && UInt16.TryParse(value.ToString(), out rating) && rating <= 10 && rating >= 1)
+                {
+                    info = value;
+                } else if(get_data_commands == 5)
+                {
+                    info = "";
+                } else
+                {
+                    info = value;
+                }
+
+                OnPropertyChanged("Info");
+            }
         }
 
         public UInt64 NumberLines
@@ -117,6 +151,9 @@ namespace Lab3_WPF
                 if (UInt64.TryParse(value.ToString(), out numberLines))
                 {
                     numberLines = value;
+                } else
+                {
+                    numberLines = 0;
                 }
 
                 OnPropertyChanged("Text");
@@ -134,7 +171,52 @@ namespace Lab3_WPF
 
         private void listBoxCommands_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            
+            String[] data = new String[] { "First Name", "Second Name", "Name of test", "Date of pass", "Rating"};
             get_data_commands = listBoxCommands.SelectedIndex;
+            if(get_data_commands == 0 && labelInfo != null && textBoxInfo != null)
+            {
+                labelInfo.Visibility = Visibility.Hidden;
+                textBoxInfo.Visibility = Visibility.Hidden;
+                datePicker.Visibility = Visibility.Hidden;
+                buttonGetData.Visibility = Visibility.Visible;
+            } else if (get_data_commands != 0)
+                ShowFieldEnterInfo(data[get_data_commands - 1]);
+            
+                
+            
+
+        }
+
+        private void info_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var tb = (TextBox)sender;
+            Info = tb.Text;
+            tb.Text = Info;
+
+            if (!"".Equals(tb.Text))
+                buttonGetData.Visibility = Visibility.Visible;
+            else
+                buttonGetData.Visibility = Visibility.Hidden;
+        }
+
+        public void ShowFieldEnterInfo(String labelName)
+        {
+            textBoxInfo.Text = "";
+            if (get_data_commands == 4)
+            {
+                datePicker.Visibility = Visibility.Visible;
+                textBoxInfo.Visibility = Visibility.Hidden;
+                buttonGetData.Visibility = Visibility.Visible;
+            } else
+            {
+                datePicker.Visibility = Visibility.Hidden;
+                textBoxInfo.Visibility = Visibility.Visible;
+                buttonGetData.Visibility = Visibility.Hidden;
+            }
+            labelInfo.Visibility = Visibility.Visible;
+            labelInfo.Content = labelName;
+            
         }
 
         private void comboBoxOrderBy_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -145,6 +227,11 @@ namespace Lab3_WPF
         private void comboBoxOrderType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             orderType = comboBoxOrderType.SelectedIndex;
+        }
+
+        private void datePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            datePassTest = DateTime.Parse(datePicker.Text);
         }
     }
 }
