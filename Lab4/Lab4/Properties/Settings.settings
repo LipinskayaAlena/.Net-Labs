@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Lab4.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="NumThreads" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="XPathNode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">docID</Value>
+    </Setting>
+    <Setting Name="XmlFolderPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\Lipinskaya_A\source\repos\.Net-Labs\Lab4_XmlTechnologies\Lab4_XmlTechnologies\Data</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
