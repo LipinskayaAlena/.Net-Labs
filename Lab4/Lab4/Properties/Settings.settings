@@ -6,10 +6,10 @@
       <Value Profile="(Default)">2</Value>
     </Setting>
     <Setting Name="XPathNode" Type="System.String" Scope="User">
-      <Value Profile="(Default)">docID</Value>
+      <Value Profile="(Default)">sort/@s_c</Value>
     </Setting>
     <Setting Name="XmlFolderPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Users\Lipinskaya_A\source\repos\.Net-Labs\Lab4_XmlTechnologies\Lab4_XmlTechnologies\Data</Value>
+      <Value Profile="(Default)">C:\Users\Lipinskaya_A\source\repos\.Net-Labs\Lab4\Lab4\Data</Value>
     </Setting>
   </Settings>
 </SettingsFile>
