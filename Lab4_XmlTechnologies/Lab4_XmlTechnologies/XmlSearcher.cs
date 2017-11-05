@@ -15,7 +15,7 @@ namespace Lab4_XmlTechnologies
             this.countThreads = countThreads;
         }
 
-        public Dictionary<String, Int32> Search(FileStream[] xmlFiles, String path)
+        public Dictionary<String, Int32> Search(Stream[] xmlFiles, String path)
         {
             Dictionary<String, Int32> nodes = new Dictionary<String, Int32>();
                 
