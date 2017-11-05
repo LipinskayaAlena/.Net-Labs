@@ -19,7 +19,7 @@ namespace Lab4
 
             result.ToList().ForEach(res =>
             {
-                Console.WriteLine(String.IsNullOrEmpty(res.Key) ? "N/A" : res.Key + ", " + res.Value);
+                Console.WriteLine((String.IsNullOrEmpty(res.Key) ? "N/A" : res.Key) + ", " + res.Value);
             });
             Console.ReadKey();
         }

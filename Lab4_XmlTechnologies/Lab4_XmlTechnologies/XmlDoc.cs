@@ -33,7 +33,7 @@ namespace Lab4_XmlTechnologies
                 return String.Empty;
             }
 
-            if(!String.IsNullOrEmpty(attribute) && !navigator.MoveToAttribute(attribute, String.Empty))
+            if(String.IsNullOrEmpty(attribute) && navigator.MoveToAttribute(attribute, String.Empty))
             {
                 return String.Empty;
             }
