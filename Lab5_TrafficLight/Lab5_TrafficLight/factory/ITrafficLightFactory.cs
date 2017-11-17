@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lab5_TrafficLight.entity;
+using Lab5_TrafficLight.controller;
 
 namespace Lab5_TrafficLight.factory
 {
     public interface ITrafficLightFactory
     {
-        TrafficLight Create(TrafficLight trafficLight);
+        ITrafficLightController Create(TrafficLight trafficLight);
     }
 }

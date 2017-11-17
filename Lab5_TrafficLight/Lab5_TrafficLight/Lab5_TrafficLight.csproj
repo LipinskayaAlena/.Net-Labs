@@ -43,6 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="controller\AdditionalTrafficLightController.cs" />
+    <Compile Include="controller\PedestrianTrafficLightController.cs" />
+    <Compile Include="controller\StandartTrafficLightController.cs" />
+    <Compile Include="controller\ITrafficLightController.cs" />
     <Compile Include="entity\AdditionalTrafficLight.cs" />
     <Compile Include="factory\ITrafficLightFactory.cs" />
     <Compile Include="entity\PedestrianTrafficLight.cs" />
@@ -56,7 +60,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="controller\" />
     <Folder Include="view\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
