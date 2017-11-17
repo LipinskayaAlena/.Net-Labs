@@ -12,15 +12,15 @@ namespace Lab4_XmlTechnologies
 
         public XPathDocument Document { get; }
 
-        private XmlDoc(FileStream xmlFile)
+        private XmlDoc(Stream xmlFile)
         {
-            XmlReader reader = XmlReader.Create(xmlFile.Name);
+            XmlReader reader = XmlReader.Create(xmlFile);
             Document = new XPathDocument(reader);
             
 
         }
 
-        public static String GetValue(FileStream xmlFile, String xPath)
+        public static String GetValue(Stream xmlFile, String xPath)
         {
             XmlDoc xmlDoc = new XmlDoc(xmlFile);
             XPathNavigator navigator = xmlDoc.Document.CreateNavigator();

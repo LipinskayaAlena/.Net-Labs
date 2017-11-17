@@ -12,14 +12,14 @@ namespace Lab4
     {
         static void Main(string[] args)
         {
-            FileStream[] xmlFiles = Directory.GetFiles(Lab4.Properties.Settings.Default.XmlFolderPath).Select(File.OpenRead).ToArray();
+            Stream[] xmlFiles = Directory.GetFiles(Lab4.Properties.Settings.Default.XmlFolderPath).Select(File.OpenRead).ToArray();
 
             XmlSearcher searcher = new XmlSearcher(Lab4.Properties.Settings.Default.NumThreads);
             Dictionary<String, Int32> result = searcher.Search(xmlFiles, Lab4.Properties.Settings.Default.XPathNode);
 
             result.ToList().ForEach(res =>
             {
-                Console.WriteLine(String.IsNullOrEmpty(res.Key) ? "N/A" : res.Key + ", " + res.Value);
+                Console.WriteLine((String.IsNullOrEmpty(res.Key) ? "N/A" : res.Key) + ", " + res.Value);
             });
             Console.ReadKey();
         }

@@ -9,7 +9,7 @@
       <Value Profile="(Default)">sort/@s_c</Value>
     </Setting>
     <Setting Name="XmlFolderPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Users\Lipinskaya_A\source\repos\.Net-Labs\Lab4\Lab4\Data</Value>
+      <Value Profile="(Default)">C:\Users\Asus\source\repos\.Net-Labs\Lab4\Lab4\Data</Value>
     </Setting>
   </Settings>
 </SettingsFile>

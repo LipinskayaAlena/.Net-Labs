@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Lab4_XmlTechnologies
 {
@@ -13,21 +15,27 @@ namespace Lab4_XmlTechnologies
             this.countThreads = countThreads;
         }
 
-        public Dictionary<String, Int32> Search(FileStream[] xmlFiles, String path)
+        public Dictionary<String, Int32> Search(Stream[] xmlFiles, String path)
         {
             Dictionary<String, Int32> nodes = new Dictionary<String, Int32>();
-         
-            foreach(FileStream xmlFile in xmlFiles) {
-                String val = XmlDoc.GetValue(xmlFile, path);
-                if (nodes.ContainsKey(val))
+                
+            ParallelOptions parallelOptions = new ParallelOptions();
+            parallelOptions.MaxDegreeOfParallelism = countThreads;
+            Parallel.For(0, xmlFiles.Length, parallelOptions, i => {
+                String val = XmlDoc.GetValue(xmlFiles[i], path);
+                lock (nodes)
                 {
-                    nodes[val]++;
+                    if (nodes.ContainsKey(val))
+                    {
+                        nodes[val]++;
+                    }
+                    else
+                    {
+                        nodes.Add(val, 1);
+                    }
                 }
-                else
-                {
-                    nodes.Add(val, 1);
-                }
-            }
+            });
+            
             return nodes;
         }
     }
