@@ -48,13 +48,14 @@
     <Compile Include="controller\StandartTrafficLightController.cs" />
     <Compile Include="controller\ITrafficLightController.cs" />
     <Compile Include="entity\AdditionalTrafficLight.cs" />
+    <Compile Include="entity\ITrafficLightDrawer.cs" />
     <Compile Include="factory\ITrafficLightFactory.cs" />
     <Compile Include="entity\PedestrianTrafficLight.cs" />
     <Compile Include="factory\TrafficLightFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="entity\StandartTrafficLight.cs" />
-    <Compile Include="entity\TrafficLight.cs" />
+    <Compile Include="entity\TrafficLightDrawer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -15,8 +15,12 @@ namespace Lab5_TrafficLight
         static void Main(string[] args)
         {
             ITrafficLightFactory factory = new TrafficLightFactory();
-            TrafficLight[] trafficLights = { new StandartTrafficLight(), new PedestrianTrafficLight(), new AdditionalTrafficLight() };
-            var trafficLight = trafficLights.Select(tl => factory.Create(tl));
+            ITrafficLightController[] controllers = { new StandartTrafficLightController(), new PedestrianTrafficLightController(), new AdditionalTrafficLightController() };
+            var trafficLights = controllers.Select(tl => factory.Create(tl));
+
+            foreach (var trafficLight in trafficLights) {
+                trafficLight.Start();
+            }
 
 
             //Console.BackgroundColor = ConsoleColor.Red;//30 3

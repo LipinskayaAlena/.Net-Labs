@@ -8,5 +8,6 @@ namespace Lab5_TrafficLight.controller
 {
     public interface ITrafficLightController
     {
+       String GetType();
     }
 }

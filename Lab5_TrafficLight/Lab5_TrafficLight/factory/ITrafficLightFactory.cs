@@ -10,6 +10,6 @@ namespace Lab5_TrafficLight.factory
 {
     public interface ITrafficLightFactory
     {
-        ITrafficLightController Create(TrafficLight trafficLight);
+        TrafficLightDrawer Create(ITrafficLightController trafficLight);
     }
 }

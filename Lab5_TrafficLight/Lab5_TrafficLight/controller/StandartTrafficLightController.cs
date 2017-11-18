@@ -8,5 +8,10 @@ namespace Lab5_TrafficLight.controller
 {
     public class StandartTrafficLightController : ITrafficLightController
     {
+
+        public string GetType()
+        {
+            return "StandartTrafficLight";
+        }
     }
 }

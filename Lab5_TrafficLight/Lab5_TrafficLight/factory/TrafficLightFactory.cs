@@ -11,16 +11,16 @@ namespace Lab5_TrafficLight.factory
     public class TrafficLightFactory : ITrafficLightFactory
     {
 
-        public ITrafficLightController Create(TrafficLight trafficLight)
+        public TrafficLightDrawer Create(ITrafficLightController trafficLight)
         {
             switch (trafficLight.GetType())
             {
-                case nameof(StandartTrafficLight):
-                    return new StandartTrafficLightController();
-                case nameof(AdditionalTrafficLight):
-                    return new AdditionalTrafficLightController();
-                case nameof(PedestrianTrafficLight):
-                    return new PedestrianTrafficLightController();
+                case nameof(StandartTrafficLightController):
+                    return new StandartTrafficLight(trafficLight);
+                case nameof(AdditionalTrafficLightController):
+                    return new AdditionalTrafficLight(trafficLight);
+                case nameof(PedestrianTrafficLightController):
+                    return new PedestrianTrafficLight(trafficLight);
                 default:
                     throw new NotSupportedException();
 

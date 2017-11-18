@@ -4,15 +4,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lab5_TrafficLight.controller;
 
 namespace Lab5_TrafficLight.entity
 {
-    public class AdditionalTrafficLight : TrafficLight
+    public class AdditionalTrafficLight : TrafficLightDrawer
     {
-        public override string GetType()
-        {
-            return "AdditionalTrafficLight";
-        }
+        public AdditionalTrafficLight(ITrafficLightController controller) : base(controller) { }
 
         public override Point GetPosition()
         {
