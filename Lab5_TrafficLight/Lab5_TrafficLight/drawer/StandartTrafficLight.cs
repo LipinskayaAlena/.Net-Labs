@@ -65,6 +65,7 @@ namespace Lab5_TrafficLight.drawer
 
         public override void PrepareConsole()
         {
+            Console.CursorVisible = false;
             Point[] points = new Point[] { GetPosition(StandartTrafficLightController.RED_COLOR),
                 GetPosition(StandartTrafficLightController.YELLOW_COLOR),
                 GetPosition(StandartTrafficLightController.GREEN_COLOR) };

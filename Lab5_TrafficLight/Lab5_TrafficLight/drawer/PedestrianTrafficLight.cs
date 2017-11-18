@@ -14,17 +14,39 @@ namespace Lab5_TrafficLight.drawer
 
         public override void Draw(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            
+            lock (ConsoleLocker)
+            {
+                PrepareConsole();
+                String color = ((LightChanger)e).ColorName;
+                Point point = GetPosition(color);
+                Console.BackgroundColor = GetColor(color);
+                Console.SetCursorPosition(point.X, point.Y);
+                Console.WriteLine("*");
+
+                Console.SetCursorPosition(point.X - 35, point.Y);
+                Console.WriteLine("*");
+
+            }
         }
 
         public override void PrepareConsole()
         {
-            throw new NotImplementedException();
+            Console.CursorVisible = false;
         }
 
         public override ConsoleColor GetColor(string nameColor)
         {
-            throw new NotImplementedException();
+            switch (nameColor)
+            {
+                case PedestrianTrafficLightController.RED_COLOR:
+                    return ConsoleColor.Red;
+                case PedestrianTrafficLightController.GREEN_COLOR:
+                    return ConsoleColor.Green;
+                default:
+                    throw new ArgumentException();
+            }
+
         }
 
         public override Point GetPosition(string nameColor)

@@ -27,7 +27,10 @@ namespace Lab5_TrafficLight.drawer
             }
         }
 
-        public override void PrepareConsole() { }
+        public override void PrepareConsole()
+        {
+            Console.CursorVisible = false;
+        }
         
 
         public override ConsoleColor GetColor(string nameColor)
