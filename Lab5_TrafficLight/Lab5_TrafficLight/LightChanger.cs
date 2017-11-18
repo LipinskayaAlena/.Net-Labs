@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab5_TrafficLight.entity
+namespace Lab5_TrafficLight.controller
 {
-    public interface ITrafficLightDrawer
+    public class LightChanger : EventArgs
     {
-        void Start();
-
-        
+        public String ColorName {get; set;}
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
-using Lab5_TrafficLight.entity;
+using Lab5_TrafficLight;
 using Lab5_TrafficLight.factory;
 using Lab5_TrafficLight.controller;
 
@@ -12,6 +12,7 @@ namespace Lab5_TrafficLight
 {
     public class Program
     {
+        
         static void Main(string[] args)
         {
             ITrafficLightFactory factory = new TrafficLightFactory();
@@ -21,6 +22,7 @@ namespace Lab5_TrafficLight
             foreach (var trafficLight in trafficLights) {
                 trafficLight.Start();
             }
+            
 
 
             //Console.BackgroundColor = ConsoleColor.Red;//30 3

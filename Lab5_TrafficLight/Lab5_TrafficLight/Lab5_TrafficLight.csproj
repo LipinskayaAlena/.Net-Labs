@@ -44,18 +44,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="controller\AdditionalTrafficLightController.cs" />
+    <Compile Include="ChangerLightEvent.cs" />
+    <Compile Include="LightChanger.cs" />
     <Compile Include="controller\PedestrianTrafficLightController.cs" />
     <Compile Include="controller\StandartTrafficLightController.cs" />
     <Compile Include="controller\ITrafficLightController.cs" />
-    <Compile Include="entity\AdditionalTrafficLight.cs" />
-    <Compile Include="entity\ITrafficLightDrawer.cs" />
+    <Compile Include="drawer\AdditionalTrafficLight.cs" />
+    <Compile Include="drawer\ITrafficLightDrawer.cs" />
     <Compile Include="factory\ITrafficLightFactory.cs" />
-    <Compile Include="entity\PedestrianTrafficLight.cs" />
+    <Compile Include="drawer\PedestrianTrafficLight.cs" />
     <Compile Include="factory\TrafficLightFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="entity\StandartTrafficLight.cs" />
-    <Compile Include="entity\TrafficLightDrawer.cs" />
+    <Compile Include="drawer\StandartTrafficLight.cs" />
+    <Compile Include="drawer\TrafficLightDrawer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

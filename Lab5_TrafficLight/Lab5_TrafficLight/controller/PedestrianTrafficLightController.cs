@@ -8,8 +8,11 @@ namespace Lab5_TrafficLight.controller
 {
     public class PedestrianTrafficLightController : ITrafficLightController
     {
+        public void TurnOn(ChangerLightEvent changerLightEvent)
+        {
 
-        public string GetType()
+        }
+        public new string GetType()
         {
             return "PedestrianTrafficLightController";
         }
