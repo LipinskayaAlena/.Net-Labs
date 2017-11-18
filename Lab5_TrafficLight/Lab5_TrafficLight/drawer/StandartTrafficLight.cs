@@ -44,18 +44,23 @@ namespace Lab5_TrafficLight.drawer
 
         public override void Draw(object sender, EventArgs e)
         {
-            PrepareConsole();
-            String color = ((LightChanger) e).ColorName;
-
-            Point point = GetPosition(color);
-            Console.BackgroundColor = GetColor(color);
-
-            for (int i = 0; i < 3; i++)
+            lock (ConsoleLocker)
             {
-                Console.SetCursorPosition(point.X, point.Y);
-                Console.WriteLine("   ");
-                point.Y++;
+                PrepareConsole();
+
+                String color = ((LightChanger)e).ColorName;
+
+                Point point = GetPosition(color);
+                Console.BackgroundColor = GetColor(color);
+
+                for (int i = 0; i < 3; i++)
+                {
+                    Console.SetCursorPosition(point.X, point.Y);
+                    Console.WriteLine("   ");
+                    point.Y++;
+                }
             }
+            
         }
 
         public override void PrepareConsole()

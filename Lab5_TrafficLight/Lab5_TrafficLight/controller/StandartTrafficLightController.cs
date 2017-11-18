@@ -16,22 +16,19 @@ namespace Lab5_TrafficLight.controller
 
         public const string GREEN_COLOR = "GREEN";
 
-        private static Timer timer;
-
         private LinkedList<string> lights = new LinkedList<string>(new string[] { RED_COLOR, YELLOW_COLOR, GREEN_COLOR });
-        LinkedListNode<string> current_light;
+        private LinkedListNode<string> current_light;
 
-        bool isEnabled;
+        private bool isEnabled;
         public void TurnOn(ChangerLightEvent changerLightEvent)
         {
-            timer = new Timer(3000);
+            Timer timer = new Timer(2000);
             isEnabled = true;
 
             current_light = lights.First;
             timer.Elapsed += (sender, e) => SwitchLight(sender, e, changerLightEvent);
             
             timer.Start();
-            
         }
 
         private void SwitchLight(object source, ElapsedEventArgs e, ChangerLightEvent changerLightEvent )
@@ -47,10 +44,6 @@ namespace Lab5_TrafficLight.controller
             {
                 isEnabled = !(isEnabled);
             }
-                
-            
-            
-                
         }
 
         public new string GetType()

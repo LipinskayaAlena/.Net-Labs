@@ -14,6 +14,8 @@ namespace Lab5_TrafficLight.drawer
 
         public ITrafficLightController controller;
 
+        public static readonly object ConsoleLocker = new object();
+
         public TrafficLightDrawer(ITrafficLightController controller)
         {
             this.controller = controller;
@@ -31,9 +33,9 @@ namespace Lab5_TrafficLight.drawer
         {
             ChangerLightEvent changer = new ChangerLightEvent();
             changer.Event += new EventHandler(Draw);
-            //changer.SimulateEvent(RED_COLOR);
-
+           
             controller.TurnOn(changer);
+            
         }
     }
 }
