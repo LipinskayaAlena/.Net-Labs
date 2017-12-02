@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Lab6_BankAccount.Models;
+using System.Linq;
 
 namespace Lab6_BankAccount.Controllers
 {
@@ -62,7 +63,7 @@ namespace Lab6_BankAccount.Controllers
         }
 
         // GET: Accounts/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Recharge(int? id)
         {
             if (id == null)
             {
@@ -82,10 +83,14 @@ namespace Lab6_BankAccount.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Date,Balance,BonusPoints,Type")] Account account)
+        public ActionResult Recharge(Account a)
         {
-            if (ModelState.IsValid)
+            int id = Int32.Parse(ModelState["Id"].Value.AttemptedValue);
+            decimal balance = Decimal.Parse(ModelState["Balance"].Value.AttemptedValue);
+            Account account = db.Account.Find(id);
+            if (ModelState.IsValid) 
             {
+                account.Balance += balance;
                 db.Entry(account).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

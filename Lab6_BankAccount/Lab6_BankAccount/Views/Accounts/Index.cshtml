@@ -44,16 +44,16 @@
             @Html.DisplayFor(modelItem => item.Date)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Balance)
+            @Html.DisplayFor(modelItem => item.Balance) BYN
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.BonusPoints)
+            @Html.DisplayFor(modelItem => item.BonusPoints) BYN
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.TypeAccount.Name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Recharge", "Recharge", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Close account", "Close account", new { id=item.Id })
         </td>
