@@ -7,7 +7,7 @@
     <Name>BankAccount</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{48254d67-84ae-4b91-9fb2-09b7dd7f05e6}</ProjectGuid>
+    <ProjectGuid>{083c8c1b-d703-4efc-aefa-e0358862ab7a}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureDatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
@@ -59,7 +59,7 @@
     <Folder Include="Properties" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="BankAccount.sql" />
+    <Build Include="Account.sql" />
     <Build Include="TypeAccount.sql" />
   </ItemGroup>
   <ItemGroup>

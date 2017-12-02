@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace Lab6_BankAccounts
+namespace Lab6_BankAccount
 {
     public class MvcApplication : System.Web.HttpApplication
     {

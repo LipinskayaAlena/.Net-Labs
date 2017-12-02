@@ -1,31 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
-  <Operation Name="Rename Refactor" Key="d75ac48e-d12c-4bd8-ad87-09a891480972" ChangeDateTime="12/02/2017 14:10:33">
-    <Property Name="ElementName" Value="[dbo].[Account].[Account]" />
-    <Property Name="ElementType" Value="SqlSimpleColumn" />
-    <Property Name="ParentElementName" Value="[dbo].[Account]" />
-    <Property Name="ParentElementType" Value="SqlTable" />
-    <Property Name="NewName" Value="Balance" />
-  </Operation>
-  <Operation Name="Rename Refactor" Key="235770e6-a056-417b-b639-d75e70f23f7f" ChangeDateTime="12/02/2017 14:11:54">
+  <Operation Name="Rename Refactor" Key="5392092f-4def-47dc-96d7-5e506780deb6" ChangeDateTime="12/02/2017 16:19:16">
     <Property Name="ElementName" Value="[dbo].[TypeAccount].[Id]" />
     <Property Name="ElementType" Value="SqlSimpleColumn" />
     <Property Name="ParentElementName" Value="[dbo].[TypeAccount]" />
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="Name" />
-  </Operation>
-  <Operation Name="Rename Refactor" Key="a2f17e70-a549-464b-a4d9-00dd7bbd4fc7" ChangeDateTime="12/02/2017 14:12:10">
-    <Property Name="ElementName" Value="[dbo].[TypeAccount].[Bonus]" />
-    <Property Name="ElementType" Value="SqlSimpleColumn" />
-    <Property Name="ParentElementName" Value="[dbo].[TypeAccount]" />
-    <Property Name="ParentElementType" Value="SqlTable" />
-    <Property Name="NewName" Value="BonusPoints" />
-  </Operation>
-  <Operation Name="Rename Refactor" Key="61f2d79e-7fe9-4316-85b9-04ce02378314" ChangeDateTime="12/02/2017 14:14:23">
-    <Property Name="ElementName" Value="[dbo].[TypeAccount].[BonusPoints]" />
-    <Property Name="ElementType" Value="SqlSimpleColumn" />
-    <Property Name="ParentElementName" Value="[dbo].[TypeAccount]" />
-    <Property Name="ParentElementType" Value="SqlTable" />
-    <Property Name="NewName" Value="BonusPercent" />
   </Operation>
 </Operations>

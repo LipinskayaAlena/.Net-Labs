@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace Lab6_BankAccounts
+namespace Lab6_BankAccount
 {
     public class BundleConfig
     {

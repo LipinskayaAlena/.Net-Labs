@@ -10,7 +10,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="FistName" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="FirstName" Type="nchar" MaxLength="20" Nullable="false" />
           <Property Name="LastName" Type="nchar" MaxLength="20" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="Balance" Type="money" Nullable="false" />
@@ -21,28 +21,12 @@
           <Key>
             <PropertyRef Name="Name" />
           </Key>
-          <Property Name="Name" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="char" MaxLength="20" Nullable="false" />
           <Property Name="BonusPercent" Type="float" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Type">
-          <End Role="TypeAccount" Type="Self.TypeAccount" Multiplicity="1" />
-          <End Role="Account" Type="Self.Account" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TypeAccount">
-              <PropertyRef Name="Name" />
-            </Principal>
-            <Dependent Role="Account">
-              <PropertyRef Name="Type" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="BankAccountModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeAccount" EntityType="Self.TypeAccount" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Type" Association="Self.FK_Type">
-            <End Role="TypeAccount" EntitySet="TypeAccount" />
-            <End Role="Account" EntitySet="Account" />
-          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -54,41 +38,23 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="FistName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Balance" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="BonusPoints" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="Type" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="TypeAccount" Relationship="Self.FK_Type" FromRole="Account" ToRole="TypeAccount" />
         </EntityType>
         <EntityType Name="TypeAccount">
           <Key>
             <PropertyRef Name="Name" />
           </Key>
-          <Property Name="Name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="BonusPercent" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Account" Relationship="Self.FK_Type" FromRole="TypeAccount" ToRole="Account" />
         </EntityType>
-        <Association Name="FK_Type">
-          <End Role="TypeAccount" Type="Self.TypeAccount" Multiplicity="1" />
-          <End Role="Account" Type="Self.Account" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TypeAccount">
-              <PropertyRef Name="Name" />
-            </Principal>
-            <Dependent Role="Account">
-              <PropertyRef Name="Type" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="BankAccountEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Account" EntityType="Self.Account" />
           <EntitySet Name="TypeAccount" EntityType="Self.TypeAccount" />
-          <AssociationSet Name="FK_Type" Association="Self.FK_Type">
-            <End Role="TypeAccount" EntitySet="TypeAccount" />
-            <End Role="Account" EntitySet="Account" />
-          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -100,7 +66,7 @@
             <EntityTypeMapping TypeName="BankAccountModel.Account">
               <MappingFragment StoreEntitySet="Account">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FistName" ColumnName="FistName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Balance" ColumnName="Balance" />

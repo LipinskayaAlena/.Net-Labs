@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Lab6_BankAccounts.Models
+namespace Lab6_BankAccount.Models
 {
     using System;
     using System.Data.Entity;

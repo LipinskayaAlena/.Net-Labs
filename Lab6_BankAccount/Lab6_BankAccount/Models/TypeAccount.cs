@@ -7,21 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Lab6_BankAccounts.Models
+namespace Lab6_BankAccount.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Account
+    public partial class TypeAccount
     {
-        public int Id { get; set; }
-        public string FistName { get; set; }
-        public string LastName { get; set; }
-        public System.DateTime Date { get; set; }
-        public decimal Balance { get; set; }
-        public decimal BonusPoints { get; set; }
-        public string Type { get; set; }
-    
-        public virtual TypeAccount TypeAccount { get; set; }
+        public string Name { get; set; }
+        public double BonusPercent { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Lipinskaya_A\source\repos\.Net-Labs\Lab6_BankAccounts\Lab6_BankAccounts\Models\BankAccount.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Lipinskaya_A\source\repos\.Net-Labs\Lab6_BankAccount\Lab6_BankAccount\Models\BankAccount.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
