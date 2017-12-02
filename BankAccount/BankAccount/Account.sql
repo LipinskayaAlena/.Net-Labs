@@ -6,5 +6,6 @@
     [Date] DATE NOT NULL, 
     [Balance] MONEY NOT NULL, 
     [BonusPoints] MONEY NOT NULL, 
-    [Type] NCHAR(20) NOT NULL
+    [Type] NCHAR(20) NOT NULL, 
+    CONSTRAINT [FK_TYPE] FOREIGN KEY ([Type]) REFERENCES [TypeAccount]([Name])
 )

@@ -21,5 +21,7 @@ namespace Lab6_BankAccount.Models
         public decimal Balance { get; set; }
         public decimal BonusPoints { get; set; }
         public string Type { get; set; }
+    
+        public virtual TypeAccount TypeAccount { get; set; }
     }
 }

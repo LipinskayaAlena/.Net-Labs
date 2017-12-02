@@ -14,7 +14,16 @@ namespace Lab6_BankAccount.Models
     
     public partial class TypeAccount
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TypeAccount()
+        {
+            this.Account = new HashSet<Account>();
+        }
+    
         public string Name { get; set; }
         public double BonusPercent { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Account> Account { get; set; }
     }
 }
