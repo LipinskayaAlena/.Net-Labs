@@ -17,6 +17,8 @@ namespace Lab6_BankAccount.Controllers
 
         private const String WITHDRAWAL_OPERATION = "Withdrawal";
 
+        private const int LIMIT_YEAR = 3;
+
         private BankAccountEntities db = new BankAccountEntities();
 
         // GET: Accounts
@@ -27,7 +29,7 @@ namespace Lab6_BankAccount.Controllers
         }
 
         // GET: Accounts/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(long? id)
         {
             if (id == null)
             {
@@ -57,6 +59,13 @@ namespace Lab6_BankAccount.Controllers
         {
             if (ModelState.IsValid)
             {
+                DateTime date = DateTime.Now; 
+                long id = Int64.Parse(DateTime.Now.ToString("yyMMddhhmmss"));
+                account.Id = id;
+                account.Date = date.AddYears(LIMIT_YEAR);
+                account.BonusPoints = 0;
+                account.Balance = 0;
+
                 db.Account.Add(account);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -67,7 +76,7 @@ namespace Lab6_BankAccount.Controllers
         }
 
         // GET: Accounts/Edit/5
-        public ActionResult Edit(int? id, String operation)
+        public ActionResult Edit(long? id, String operation)
         {
             if (id == null)
             {
@@ -114,7 +123,7 @@ namespace Lab6_BankAccount.Controllers
         }
 
         // GET: Accounts/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(long? id)
         {
             if (id == null)
             {
@@ -131,7 +140,7 @@ namespace Lab6_BankAccount.Controllers
         // POST: Accounts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(long id)
         {
             Account account = db.Account.Find(id);
             db.Account.Remove(account);

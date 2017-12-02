@@ -11,6 +11,14 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            Type
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TypeAccount.Name)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
 
@@ -48,14 +56,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.BonusPoints) BYN
-        </dd>
-
-        <dt>
-            Type
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TypeAccount.Name)
         </dd>
 
     </dl>

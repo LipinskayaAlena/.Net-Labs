@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="bigint" Nullable="false" />
           <Property Name="FirstName" Type="nchar" MaxLength="20" Nullable="false" />
           <Property Name="LastName" Type="nchar" MaxLength="20" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
@@ -53,7 +53,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int64" Nullable="false" />
           <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
