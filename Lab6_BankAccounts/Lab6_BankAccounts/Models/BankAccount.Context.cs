@@ -25,6 +25,7 @@ namespace Lab6_BankAccounts.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<Account> Account { get; set; }
+        public virtual DbSet<TypeAccount> TypeAccount { get; set; }
     }
 }

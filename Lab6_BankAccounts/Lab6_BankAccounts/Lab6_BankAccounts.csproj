@@ -172,6 +172,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BankAccount.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\TypeAccount.cs">
+      <DependentUpon>BankAccount.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -183,8 +186,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Models\BankAccount.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>BankAccount.Context.cs</LastGenOutput>
       <DependentUpon>BankAccount.edmx</DependentUpon>
+      <LastGenOutput>BankAccount.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\BankAccount.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

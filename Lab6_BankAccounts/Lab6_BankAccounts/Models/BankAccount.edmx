@@ -10,15 +10,39 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Type" Type="nchar" MaxLength="20" Nullable="false" />
           <Property Name="FistName" Type="nchar" MaxLength="20" Nullable="false" />
           <Property Name="LastName" Type="nchar" MaxLength="20" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
-          <Property Name="Account" Type="money" Nullable="false" />
+          <Property Name="Balance" Type="money" Nullable="false" />
           <Property Name="BonusPoints" Type="money" Nullable="false" />
+          <Property Name="Type" Type="nchar" MaxLength="20" Nullable="false" />
         </EntityType>
+        <EntityType Name="TypeAccount">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="BonusPercent" Type="float" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Type">
+          <End Role="TypeAccount" Type="Self.TypeAccount" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeAccount">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="BankAccountModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeAccount" EntityType="Self.TypeAccount" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Type" Association="Self.FK_Type">
+            <End Role="TypeAccount" EntitySet="TypeAccount" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -30,15 +54,41 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Type" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="FistName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Account1" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Balance" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="BonusPoints" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TypeAccount" Relationship="Self.FK_Type" FromRole="Account" ToRole="TypeAccount" />
         </EntityType>
+        <EntityType Name="TypeAccount">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="BonusPercent" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Type" FromRole="TypeAccount" ToRole="Account" />
+        </EntityType>
+        <Association Name="FK_Type">
+          <End Role="TypeAccount" Type="Self.TypeAccount" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeAccount">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="BankAccountEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="Account" EntityType="Self.Account" />
+          <EntitySet Name="TypeAccount" EntityType="Self.TypeAccount" />
+          <AssociationSet Name="FK_Type" Association="Self.FK_Type">
+            <End Role="TypeAccount" EntitySet="TypeAccount" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -46,16 +96,24 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="BankAccountModelStoreContainer" CdmEntityContainer="BankAccountEntities">
-          <EntitySetMapping Name="Accounts">
+          <EntitySetMapping Name="Account">
             <EntityTypeMapping TypeName="BankAccountModel.Account">
               <MappingFragment StoreEntitySet="Account">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="FistName" ColumnName="FistName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Account1" ColumnName="Account" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
                 <ScalarProperty Name="BonusPoints" ColumnName="BonusPoints" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeAccount">
+            <EntityTypeMapping TypeName="BankAccountModel.TypeAccount">
+              <MappingFragment StoreEntitySet="TypeAccount">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BonusPercent" ColumnName="BonusPercent" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -73,7 +131,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

@@ -15,11 +15,13 @@ namespace Lab6_BankAccounts.Models
     public partial class Account
     {
         public int Id { get; set; }
-        public string Type { get; set; }
         public string FistName { get; set; }
         public string LastName { get; set; }
         public System.DateTime Date { get; set; }
-        public decimal Account1 { get; set; }
+        public decimal Balance { get; set; }
         public decimal BonusPoints { get; set; }
+        public string Type { get; set; }
+    
+        public virtual TypeAccount TypeAccount { get; set; }
     }
 }
