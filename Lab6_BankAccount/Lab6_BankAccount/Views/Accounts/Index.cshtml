@@ -53,7 +53,8 @@
             @Html.DisplayFor(modelItem => item.TypeAccount.Name)
         </td>
         <td>
-            @Html.ActionLink("Recharge", "Recharge", new { id=item.Id }) |
+            @Html.ActionLink("Recharge", "Edit", new { id=item.Id, operation = "Recharge" }) |
+            @Html.ActionLink("Withdrawal", "Edit", new { id = item.Id, operation = "Withdrawal" }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Close account", "Close account", new { id=item.Id })
         </td>

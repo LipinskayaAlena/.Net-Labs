@@ -13,6 +13,10 @@ namespace Lab6_BankAccount.Controllers
 {
     public class AccountsController : Controller
     {
+        private const String RECHARGE_OPERATION = "Recharge";
+
+        private const String WITHDRAWAL_OPERATION = "Withdrawal";
+
         private BankAccountEntities db = new BankAccountEntities();
 
         // GET: Accounts
@@ -63,7 +67,7 @@ namespace Lab6_BankAccount.Controllers
         }
 
         // GET: Accounts/Edit/5
-        public ActionResult Recharge(int? id)
+        public ActionResult Edit(int? id, String operation)
         {
             if (id == null)
             {
@@ -74,6 +78,7 @@ namespace Lab6_BankAccount.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Operation = operation;
             ViewBag.Type = new SelectList(db.TypeAccount, "Name", "Name", account.Type);
             return View(account);
         }
@@ -83,14 +88,23 @@ namespace Lab6_BankAccount.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Recharge(Account a)
+        public ActionResult Edit(String operation, Account a)
         {
             int id = Int32.Parse(ModelState["Id"].Value.AttemptedValue);
             decimal balance = Decimal.Parse(ModelState["Balance"].Value.AttemptedValue);
             Account account = db.Account.Find(id);
             if (ModelState.IsValid) 
             {
-                account.Balance += balance;
+                if(String.Equals(RECHARGE_OPERATION, operation))
+                {
+                    account.Balance += balance;
+                }
+
+                if (String.Equals(WITHDRAWAL_OPERATION, operation))
+                {
+                    account.Balance -= balance;
+                }
+
                 db.Entry(account).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
