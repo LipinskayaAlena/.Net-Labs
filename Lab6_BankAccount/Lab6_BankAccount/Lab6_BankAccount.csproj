@@ -154,6 +154,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Service\IServiceAccount.cs" />
     <Compile Include="Models\Account.cs">
       <DependentUpon>BankAccount.tt</DependentUpon>
     </Compile>
@@ -176,8 +177,7 @@
       <DependentUpon>BankAccount.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="utils\GeneratorNumber.cs" />
-    <Compile Include="utils\IGeneratorNumber.cs" />
+    <Compile Include="Service\ServiceAccount.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />

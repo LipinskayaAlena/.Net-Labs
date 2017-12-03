@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Lab6_BankAccount.Models;
-using Lab6_BankAccount.utils;
+using Lab6_BankAccount.Service;
 
 namespace Lab6_BankAccount.Controllers
 {
@@ -20,6 +20,8 @@ namespace Lab6_BankAccount.Controllers
         private const int LIMIT_YEAR = 3;
 
         private BankAccountEntities db = new BankAccountEntities();
+
+        private IServiceAccount serviceAccount = new ServiceAccount();
 
         // GET: Accounts
         public ActionResult Index()
@@ -57,11 +59,10 @@ namespace Lab6_BankAccount.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Date,Balance,BonusPoints,Type")] Account account)
         {
-            IGeneratorNumber generator = new GeneratorNumber();
             if (ModelState.IsValid)
             {
                 DateTime date = DateTime.Now;
-                long id = generator.Generate();
+                long id = serviceAccount.NumberAccount();
                 account.Id = id;
                 account.Date = date.AddYears(LIMIT_YEAR);
                 account.BonusPoints = 0;
@@ -113,7 +114,8 @@ namespace Lab6_BankAccount.Controllers
 
             if (ModelState.IsValid) 
             {
-                account.BonusPoints += (decimal)account.TypeAccount.BonusPercent * balance;
+                //IBonusPoints bonusPoints = new BonusPoints();
+                account.BonusPoints += serviceAccount.CountBonus(account, balance);
                 if (String.Equals(RECHARGE_OPERATION, operation))
                 {
                     account.Balance += balance;
