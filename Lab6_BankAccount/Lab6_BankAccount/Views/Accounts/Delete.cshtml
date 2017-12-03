@@ -6,7 +6,14 @@
 
 <h2>Close account</h2>
 
-<h3>Are you sure want to close this account?</h3>
+@if (Model.Balance != 0)
+{
+    <h2 class="text-danger"> You can't close this account because balance greater than 0</h2>
+}
+else
+{
+    <h3>Are you sure want to close this account?</h3>
+}
 <div>
     <h4>Account</h4>
     <hr />
@@ -65,7 +72,10 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+        @if (Model.Balance == 0)
+        {
+            <input type="submit" value="Delete" class="btn btn-default" /><br/>
+        }
             @Html.ActionLink("Back to List", "Index")
         </div>
     }

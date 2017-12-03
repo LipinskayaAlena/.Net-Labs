@@ -143,8 +143,10 @@ namespace Lab6_BankAccount.Controllers
         public ActionResult DeleteConfirmed(long id)
         {
             Account account = db.Account.Find(id);
+           
             db.Account.Remove(account);
             db.SaveChanges();
+            
             return RedirectToAction("Index");
         }
 
