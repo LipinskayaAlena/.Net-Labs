@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Lab6_BankAccount.Models;
-using System.Linq;
+using Lab6_BankAccount.utils;
 
 namespace Lab6_BankAccount.Controllers
 {
@@ -57,10 +57,11 @@ namespace Lab6_BankAccount.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Date,Balance,BonusPoints,Type")] Account account)
         {
+            IGeneratorNumber generator = new GeneratorNumber();
             if (ModelState.IsValid)
             {
-                DateTime date = DateTime.Now; 
-                long id = Int64.Parse(DateTime.Now.ToString("yyMMddhhmmss"));
+                DateTime date = DateTime.Now;
+                long id = generator.Generate();
                 account.Id = id;
                 account.Date = date.AddYears(LIMIT_YEAR);
                 account.BonusPoints = 0;

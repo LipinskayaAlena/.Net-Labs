@@ -176,6 +176,8 @@
       <DependentUpon>BankAccount.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="utils\GeneratorNumber.cs" />
+    <Compile Include="utils\IGeneratorNumber.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
