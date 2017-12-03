@@ -99,12 +99,21 @@ namespace Lab6_BankAccount.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(String operation, Account a)
         {
-            int id = Int32.Parse(ModelState["Id"].Value.AttemptedValue);
+            long id = Int64.Parse(ModelState["Id"].Value.AttemptedValue);
             decimal balance = Decimal.Parse(ModelState["Balance"].Value.AttemptedValue);
             Account account = db.Account.Find(id);
+
+            if(balance > account.Balance && String.Equals(WITHDRAWAL_OPERATION, operation))
+            {
+                ViewBag.Operation = operation;
+                ViewBag.Error = "error";
+                return View(account);
+            }
+
             if (ModelState.IsValid) 
             {
-                if(String.Equals(RECHARGE_OPERATION, operation))
+                account.BonusPoints += (decimal)account.TypeAccount.BonusPercent * balance;
+                if (String.Equals(RECHARGE_OPERATION, operation))
                 {
                     account.Balance += balance;
                 }
@@ -157,6 +166,20 @@ namespace Lab6_BankAccount.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult About()
+        {
+            ViewBag.Message = "BankAccounts description page.";
+
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Contact page.";
+
+            return View();
         }
     }
 }

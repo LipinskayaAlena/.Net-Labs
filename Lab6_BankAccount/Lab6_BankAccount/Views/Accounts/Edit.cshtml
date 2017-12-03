@@ -5,6 +5,10 @@
 }
 
 <h2>@ViewBag.Operation balance</h2>
+@if (ViewBag.Error != null)
+{
+    <h3 class="text-danger">Your balance greater than sumary of your recharging</h3>
+}
 
 
 @using (Html.BeginForm())
